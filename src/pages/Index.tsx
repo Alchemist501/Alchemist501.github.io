@@ -1,4 +1,4 @@
-import { useState, useCallback } from "react";
+import { useState, useCallback, useEffect } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import { LightPortfolio } from "@/components/LightPortfolio";
@@ -88,13 +88,30 @@ const DarkModeContent = ({
   heroOpacity: any;
 }) => {
   const { theme } = useTheme();
+  const location = useLocation();
+
+  // Initialize active section from hash or default to network
+  useEffect(() => {
+    if (theme === 'dark') {
+      const hash = location.hash.replace('#', '');
+      if (hash && ["network", "about", "projects", "skills", "achievements", "experience", "contact"].includes(hash)) {
+        setActiveSection(hash as any);
+      }
+    }
+  }, [theme, location.hash]);
+
+  // Update hash when active section changes
+  useEffect(() => {
+    if (theme === 'dark') {
+      window.history.replaceState(null, '', `#${activeSection}`);
+      window.scrollTo(0, 0);
+    }
+  }, [activeSection, theme]);
 
   const scrollToSection = (id: "network" | "about" | "projects" | "skills" | "achievements" | "experience" | "contact") => {
     setActiveSection(id);
-    const element = document.getElementById(id);
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+    // In dark mode, we don't scroll to ID, we just switch state and reset scroll
+    window.scrollTo(0, 0);
   };
 
   const handleCommand = (cmd: string) => {
@@ -592,7 +609,7 @@ const DarkModeContent = ({
                   <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                     <div>
                       <h3 className="text-lg md:text-xl font-bold text-primary font-mono">Research and Development Intern</h3>
-                      <p className="text-accent font-mono mt-1">HSS (Human Safety Services)</p>
+                      <p className="text-accent font-mono mt-1">HSS (Harish Software Solutions)</p>
                     </div>
                     <div className="text-sm text-muted-foreground font-mono mt-2 md:mt-0">
                       Dec 2023 - May 2024
@@ -600,7 +617,7 @@ const DarkModeContent = ({
                   </div>
                   <div className="space-y-3 text-sm md:text-base">
                     <p className="text-muted-foreground">
-                      Worked on cybersecurity research and development projects, focusing on security analysis and vulnerability assessment.
+                      Built scalable backend systems. Involved in building secure and efficient backend systems, implementing APIs, and ensuring data integrity.
                     </p>
                     <div className="flex flex-wrap gap-2 mt-4">
                       {["Research", "Security Analysis", "Vulnerability Assessment", "Development"].map((skill) => (
@@ -753,13 +770,13 @@ const DarkModeContent = ({
                 className="flex justify-center gap-6"
               >
                 <a
-                  href="mailto:siyapp@example.com"
+                  href="mailto:siyapp.mec@gmail.com"
                   className="p-4 bg-primary/20 text-primary rounded-full border-2 border-primary hover:bg-primary hover:text-background transition-colors"
                 >
                   <Mail className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://linkedin.com"
+                  href="https://www.linkedin.com/in/alchemist501"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-4 bg-primary/20 text-primary rounded-full border-2 border-primary hover:bg-primary hover:text-background transition-colors"
@@ -767,7 +784,7 @@ const DarkModeContent = ({
                   <Linkedin className="w-6 h-6" />
                 </a>
                 <a
-                  href="https://github.com"
+                  href="https://github.com/Alchemist501"
                   target="_blank"
                   rel="noopener noreferrer"
                   className="p-4 bg-primary/20 text-primary rounded-full border-2 border-primary hover:bg-primary hover:text-background transition-colors"

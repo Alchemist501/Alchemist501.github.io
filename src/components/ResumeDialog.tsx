@@ -55,7 +55,7 @@ export const ResumeDialog = ({ variant = "default" }: { variant?: "default" | "c
                   {/* Row 1: Links (Left) and Email (Right) */}
                   <div className="flex justify-between items-center">
                     <div className="flex items-center gap-3">
-                      <a href="https://linkedin.com/in/siyapp" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                      <a href="https://www.linkedin.com/in/alchemist501" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
                         <Linkedin className="h-3.5 w-3.5" />
                         <span>LinkedIn</span>
                       </a>
@@ -70,7 +70,7 @@ export const ResumeDialog = ({ variant = "default" }: { variant?: "default" | "c
                         <span>Portfolio</span>
                       </a>
                       <span className="text-muted-foreground">|</span>
-                      <a href="https://tryhackme.com/p/Alchemist501" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                      <a href="https://tryhackme.com/p/HoloCrypt" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
                         <Code className="h-3.5 w-3.5" />
                         <span>TryHackMe</span>
                       </a>
@@ -146,13 +146,13 @@ export const ResumeDialog = ({ variant = "default" }: { variant?: "default" | "c
                   <div className="flex justify-between items-start">
                     <div>
                       <h4 className="font-bold">Research and Development Intern</h4>
-                      <p className="text-sm text-muted-foreground">HSS (Human Safety Services)</p>
+                      <p className="text-sm text-muted-foreground">HSS (Harish Software Systems)</p>
                     </div>
                     <p className="text-sm text-muted-foreground">Dec 2023 - May 2024</p>
                   </div>
                   <ul className="list-disc list-inside text-sm space-y-1 ml-4 text-muted-foreground">
-                    <li>Conducted cybersecurity research and development projects</li>
-                    <li>Performed security analysis and vulnerability assessments on enterprise systems</li>
+                    <li>Conducted research in scalable backend systems.</li>
+                    <li>Involved in building secure and efficient backend systems, implementing APIs, and ensuring data integrity.</li>
                     <li>Collaborated with cross-functional teams to implement security best practices</li>
                     <li>Developed and tested security solutions for client applications</li>
                   </ul>

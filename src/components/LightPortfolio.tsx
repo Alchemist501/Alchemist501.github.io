@@ -132,7 +132,53 @@ export const LightPortfolio = () => {
     transition: { duration: 0.6 },
   };
 
+  const [scrolled, setScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setScrolled(window.scrollY > 50);
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Sync active section with hash on scroll
+  useEffect(() => {
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            if (id) {
+              window.history.replaceState(null, '', `#${id}`);
+            }
+          }
+        });
+      },
+      { threshold: 0.5 }
+    );
+
+    const sections = document.querySelectorAll("section[id]");
+    sections.forEach((section) => observer.observe(section));
+
+    return () => sections.forEach((section) => observer.unobserve(section));
+  }, []);
+
+  // Scroll to section on mount if hash exists
+  useEffect(() => {
+    const hash = window.location.hash.replace('#', '');
+    if (hash) {
+      setTimeout(() => {
+        const element = document.getElementById(hash);
+        if (element) {
+          element.scrollIntoView({ behavior: 'smooth' });
+        }
+      }, 100);
+    }
+  }, []);
+
   const scrollToSection = (id: string) => {
+    setMobileMenuOpen(false);
     const element = document.getElementById(id);
     if (element) {
       const headerOffset = 100;
@@ -143,40 +189,32 @@ export const LightPortfolio = () => {
         top: offsetPosition,
         behavior: "smooth"
       });
+      window.history.pushState(null, '', `#${id}`);
     }
-    setMobileMenuOpen(false);
   };
-
-  const [scrolled, setScrolled] = useState(false);
-
-  useEffect(() => {
-    const handleScroll = () => {
-      setScrolled(window.scrollY > 50);
-    };
-
-    window.addEventListener("scroll", handleScroll);
-    return () => window.removeEventListener("scroll", handleScroll);
-  }, []);
-
   return (
     <div className="min-h-screen bg-white text-gray-900">
-      {/* Navigation Header */}
       {/* Navigation Header */}
       <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? "bg-white/90 backdrop-blur-md shadow-sm py-4" : "bg-transparent py-6"}`}>
         <nav className="w-full px-4 lg:px-8">
           <div className="flex items-center justify-between">
-            <motion.div
-              initial={{ opacity: 0, x: -20 }}
-              animate={{ opacity: 1, x: 0 }}
-              key={scrolled ? "name" : "question"}
-              className={`transition-all duration-300 ${!scrolled ? "font-lora italic font-bold text-lg md:text-xl" : "font-playfair text-2xl md:text-3xl font-bold"}`}
-            >
-              {/* Show "SIYA P P" on mobile only when scrolled, or the question on desktop if not scrolled */}
-              <span className="md:hidden">{scrolled ? "SIYA P P" : ""}</span>
-              <span className="hidden md:inline">
-                {scrolled ? "SIYA P P" : "Want to know more about me?"}
-              </span>
-            </motion.div>
+            <div className="flex items-center gap-3">
+              {/* Mobile Hire Me Button */}
+              <div className="md:hidden">
+                <ResumeDialog />
+              </div>
+              <motion.div
+                initial={{ opacity: 0, x: -20 }}
+                animate={{ opacity: 1, x: 0 }}
+                key={scrolled ? "name" : "question"}
+                className={`transition-all duration-300 ${!scrolled ? "font-lora italic font-bold text-lg md:text-xl" : "font-playfair text-2xl md:text-3xl font-bold"}`}
+              >
+                {/* Show question on desktop if not scrolled, otherwise show name. Hidden on mobile. */}
+                <span className="hidden md:inline">
+                  {scrolled ? "SIYA P P" : "Want to know more about me?"}
+                </span>
+              </motion.div>
+            </div>
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center gap-3 lg:gap-6">
@@ -214,7 +252,6 @@ export const LightPortfolio = () => {
 
             {/* Mobile Menu Toggle */}
             <div className="md:hidden flex items-center gap-3">
-              <ResumeDialog />
               <ThemeToggle />
               <button
                 className="text-gray-900"
@@ -582,7 +619,7 @@ export const LightPortfolio = () => {
               <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
                 <div>
                   <h3 className="text-lg md:text-xl font-playfair font-bold text-gray-900">Research and Development Intern</h3>
-                  <p className="text-sm text-gray-600 mt-1 font-lora italic font-medium">HSS (Human Safety Services)</p>
+                  <p className="text-sm text-gray-600 mt-1 font-lora italic font-medium">HSS (Harish Software Solutions )</p>
                 </div>
                 <div className="text-sm text-gray-500 mt-2 md:mt-0">
                   Dec 2023 - May 2024
@@ -590,8 +627,7 @@ export const LightPortfolio = () => {
               </div>
               <div className="space-y-3">
                 <p className="text-gray-700 font-lora italic font-medium">
-                  Worked on cybersecurity research and development projects, focusing on security analysis and vulnerability assessment.
-                </p>
+                  Built scalable backend systems. Involved in building secure and efficient backend systems, implementing APIs, and ensuring data integrity.                </p>
                 <div className="flex flex-wrap gap-2 mt-4">
                   {["Research", "Security Analysis", "Vulnerability Assessment", "Development"].map((skill) => (
                     <span key={skill} className="px-3 py-1 bg-gray-100 text-gray-700 text-xs md:text-sm rounded-full">
@@ -726,13 +762,13 @@ export const LightPortfolio = () => {
             className="flex justify-center gap-6"
           >
             <a
-              href="mailto:cyber@example.com"
+              href="mailto:siyapp.mec@gmail.com"
               className="p-4 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors"
             >
               <Mail className="w-6 h-6" />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/in/alchemist501"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors"
@@ -740,7 +776,7 @@ export const LightPortfolio = () => {
               <Linkedin className="w-6 h-6" />
             </a>
             <a
-              href="https://github.com"
+              href="https://github.com/Alchemist501"
               target="_blank"
               rel="noopener noreferrer"
               className="p-4 bg-gray-900 text-white rounded-full hover:bg-gray-800 transition-colors"

@@ -58,7 +58,7 @@ const projects: Project[] = [
     description: "Automated reconnaissance utility for bug bounty hunting. Integrates popular asset discovery tools (Subfinder, Assetfinder) into a single efficient workflow, improving speed and comprehensiveness of initial target analysis.",
     tech: ["Python", "Subfinder", "Assetfinder", "Automation"],
     category: "security",
-    github: "https://github.com/siyapp",
+    github: "https://github.com/Alchemist501/SubWhisper",
     image: "/assets/Projects/SubWhisper.jpg"
   },
   {
@@ -66,7 +66,7 @@ const projects: Project[] = [
     description: "AI-driven web application for agricultural insights using ResNet (CNN) model with OpenCV and Scikit-learn. Built on Python/Flask stack for crop disease detection and farming recommendations.",
     tech: ["Python", "Flask", "ResNet", "OpenCV", "Scikit-learn"],
     category: "other",
-    github: "https://github.com/siyapp",
+    github: "https://github.com/Alchemist501/AGGROW",
     image: "https://media1.giphy.com/media/v1.Y2lkPTc5MGI3NjExZXJnemNpYjc0ZmM0dmk5NTJxMGlqYnZ6azdkNGg1ajhzcmc2cWoyZiZlcD12MV9pbnRlcm5hbF9naWZfYnlfaWQmY3Q9Zw/kDMUEiovRiZb1E4wku/giphy.gif",
   },
   {
@@ -74,7 +74,7 @@ const projects: Project[] = [
     description: "Flask-based system using OpenCV to analyze animal behavior in real-time. Detects unusual patterns and triggers alerts for disaster prediction, demonstrating proficiency in Python, Flask, and computer vision.",
     tech: ["Python", "Flask", "OpenCV", "Computer Vision"],
     category: "other",
-    github: "https://github.com/siyapp",
+    github: "https://github.com/Alchemist501/Biosignals-DisasterPrediction",
     image: "/assets/Projects/BioSignals.gif",
     demo: "/assets/Projects/BioSignals.mp4"
   },
@@ -83,7 +83,7 @@ const projects: Project[] = [
     description: "Intelligent agent for automating task management by processing email content. Uses NLP to extract deadline information and interfaces with calendar/alarm systems for automated reminders.",
     tech: ["Python", "NLP", "NLTK", "SpaCy", "Gmail API"],
     category: "other",
-    github: "https://github.com/siyapp",
+    link: "https://www.linkedin.com/posts/alchemist501_n8n-googlegemini-ai-activity-7382131709493796865-dmqv?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
     image: "/assets/Projects/Deadline.jpg"
   },
 ];
