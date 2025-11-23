@@ -1,6 +1,6 @@
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from "@/components/ui/dialog";
 import { Button } from "@/components/ui/button";
-import { FileText, Mail, Phone, MapPin, Briefcase, GraduationCap, Award } from "lucide-react";
+import { FileText, Mail, Phone, MapPin, Briefcase, GraduationCap, Award, Code, Linkedin, Github, Globe } from "lucide-react";
 
 export const ResumeDialog = ({ variant = "default" }: { variant?: "default" | "cyber" }) => {
   return (
@@ -11,152 +11,320 @@ export const ResumeDialog = ({ variant = "default" }: { variant?: "default" | "c
           Hire Me
         </Button>
       </DialogTrigger>
-      <DialogContent className="max-w-3xl max-h-[90vh] overflow-y-auto">
+      <DialogContent className="max-w-4xl max-h-[90vh] overflow-y-auto">
         <DialogHeader>
-          <DialogTitle className="text-2xl">Professional Resume</DialogTitle>
+          <DialogTitle className="text-3xl font-bold text-center">SIYA P P</DialogTitle>
+          <p className="text-center text-sm text-muted-foreground">Cybersecurity Researcher | Bug Bounty Hunter | Backend Developer</p>
         </DialogHeader>
-        
+
         <div className="space-y-6 py-4">
-          {/* Contact Info */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-bold flex items-center gap-2">
-              <Mail className="h-5 w-5" />
-              Contact Information
-            </h3>
-            <div className="pl-7 space-y-1 text-sm">
-              <p className="flex items-center gap-2">
-                <Mail className="h-4 w-4" /> siyapp@example.com
-              </p>
-              <p className="flex items-center gap-2">
-                <MapPin className="h-4 w-4" /> Kerala, India
-              </p>
+          {/* Contact Information */}
+          <div className="border-b pb-4">
+            <div className="flex flex-wrap justify-center gap-3 text-xs">
+              <a href="mailto:siyapp@example.com" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Mail className="h-3.5 w-3.5" />
+                <span>siyapp@example.com</span>
+              </a>
+              <span className="text-muted-foreground">•</span>
+              <div className="flex items-center gap-1.5">
+                <MapPin className="h-3.5 w-3.5" />
+                <span>Kerala, India</span>
+              </div>
+              <span className="text-muted-foreground">•</span>
+              <a href="https://linkedin.com/in/siyapp" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Linkedin className="h-3.5 w-3.5" />
+                <span>linkedin.com/in/siyapp</span>
+              </a>
+              <span className="text-muted-foreground">•</span>
+              <a href="https://github.com/Alchemist501" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Github className="h-3.5 w-3.5" />
+                <span>github.com/Alchemist501</span>
+              </a>
+              <span className="text-muted-foreground">•</span>
+              <a href="https://tryhackme.com/p/Alchemist501" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Code className="h-3.5 w-3.5" />
+                <span>tryhackme.com/p/Alchemist501</span>
+              </a>
+              <span className="text-muted-foreground">•</span>
+              <a href="https://alchemist501.github.io" target="_blank" rel="noopener noreferrer" className="flex items-center gap-1.5 hover:text-primary transition-colors">
+                <Globe className="h-3.5 w-3.5" />
+                <span>alchemist501.github.io</span>
+              </a>
             </div>
           </div>
 
-          {/* About */}
+          {/* Professional Summary */}
           <div className="space-y-2">
-            <h3 className="text-lg font-bold">About Me</h3>
-            <div className="pl-7 text-sm space-y-2">
-              <p>
-                Driven B.Tech student in Computer Science and Business Systems, specializing in Cybersecurity, Backend Development, and AI in security. Proficient in Python, C++, and advanced security tools like Burp Suite, Nmap, and Wireshark.
-              </p>
-              <p className="font-semibold mt-3">Experience spans:</p>
-              <ul className="list-disc list-inside space-y-1 ml-2">
-                <li><strong>Offensive Security:</strong> Bug Bounty Hunting on live assets (Meta, Zomato), penetration testing, and ethical hacking</li>
-                <li><strong>Secure Systems & Research:</strong> FL-DP Framework (Federated Learning + Differential Privacy) and The Marauder's Map (network anomaly detection)</li>
-                <li><strong>Security Operations:</strong> Completed SOC Analyst workflows on LetsDefend.io handling malware and RCE exploitation cases</li>
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1">Professional Summary</h3>
+            <p className="text-sm leading-relaxed">
+              Tech Enthusiast who finds beauty in how systems work—how small pieces connect, how patterns form, and how a simple idea can turn into something meaningful when built with intention. This perspective shapes the way I approach backend development, automation, and privacy-focused digital solutions. I enjoy breaking down problems, understanding them deeply, and designing tools that make processes smoother, more organized, and more efficient. As a CSBS undergrad, I combine technical thinking with practical application, aiming to create solutions that are clear, reliable, and genuinely useful to the people who rely on them.
+            </p>
+          </div>
+
+          {/* Technical Skills */}
+          <div className="space-y-2">
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1 flex items-center gap-2">
+              <Code className="h-5 w-5" />
+              Technical Skills
+            </h3>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-3 text-sm">
+              <div>
+                <p className="font-semibold">Security & Testing:</p>
+                <p className="text-muted-foreground">Penetration Testing, Network Security, Threat Intelligence, SIEM, Vulnerability Assessment, Ethical Hacking</p>
+              </div>
+              <div>
+                <p className="font-semibold">Security Tools:</p>
+                <p className="text-muted-foreground">Burp Suite, Wireshark, Nmap, Scapy, GoPhish, Metasploit</p>
+              </div>
+              <div>
+                <p className="font-semibold">Programming Languages:</p>
+                <p className="text-muted-foreground">Python, C++, JavaScript, Bash, SQL</p>
+              </div>
+              <div>
+                <p className="font-semibold">Frameworks & Platforms:</p>
+                <p className="text-muted-foreground">Linux, Windows, Git, Flask, Node.js, React</p>
+              </div>
+            </div>
+          </div>
+
+          {/* Professional Experience */}
+          <div className="space-y-3">
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1 flex items-center gap-2">
+              <Briefcase className="h-5 w-5" />
+              Professional Experience
+            </h3>
+
+            {/* Bug Bounty Hunter */}
+            <div className="space-y-1">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-bold">Bug Bounty Hunter</h4>
+                  <p className="text-sm text-muted-foreground">Independent Security Researcher</p>
+                </div>
+                <p className="text-sm text-muted-foreground">Ongoing</p>
+              </div>
+              <ul className="list-disc list-inside text-sm space-y-1 ml-4 text-muted-foreground">
+                <li>Actively hunting vulnerabilities on live assets including Meta and Zomato platforms</li>
+                <li>Performing continuous reconnaissance and comprehensive vulnerability assessments</li>
+                <li>Conducting penetration testing and ethical hacking on web applications</li>
+                <li>Identifying and reporting security flaws following responsible disclosure practices</li>
+              </ul>
+            </div>
+
+            {/* R&D Intern */}
+            <div className="space-y-1">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-bold">Research and Development Intern</h4>
+                  <p className="text-sm text-muted-foreground">HSS (Human Safety Services)</p>
+                </div>
+                <p className="text-sm text-muted-foreground">Dec 2023 - May 2024</p>
+              </div>
+              <ul className="list-disc list-inside text-sm space-y-1 ml-4 text-muted-foreground">
+                <li>Conducted cybersecurity research and development projects</li>
+                <li>Performed security analysis and vulnerability assessments on enterprise systems</li>
+                <li>Collaborated with cross-functional teams to implement security best practices</li>
+                <li>Developed and tested security solutions for client applications</li>
+              </ul>
+            </div>
+
+            {/* IBM SkillsBuild */}
+            <div className="space-y-1">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-bold">Cybersecurity Intern</h4>
+                  <p className="text-sm text-muted-foreground">IBM SkillsBuild with CSRBOX</p>
+                </div>
+                <p className="text-sm text-muted-foreground">2-week Program</p>
+              </div>
+              <ul className="list-disc list-inside text-sm space-y-1 ml-4 text-muted-foreground">
+                <li>Completed intensive cybersecurity fundamentals training program</li>
+                <li>Gained practical knowledge in security operations and threat analysis</li>
+                <li>Applied cybersecurity concepts to real-world scenarios and case studies</li>
+              </ul>
+            </div>
+
+            {/* Security Training */}
+            <div className="space-y-1">
+              <div>
+                <h4 className="font-bold">Security Training & Continuous Learning</h4>
+                <p className="text-sm text-muted-foreground">Multiple Platforms | Ongoing</p>
+              </div>
+              <ul className="list-disc list-inside text-sm space-y-1 ml-4 text-muted-foreground">
+                <li>Active participant on TryHackMe, LetsDefend.io, PicoCTF, PortSwigger Labs, and Hack The Box</li>
+                <li>Completed SOC Analyst workflows handling malware side-loading and RCE exploitation cases</li>
+                <li>Regularly solving CTF challenges and security labs to enhance practical skills</li>
               </ul>
             </div>
           </div>
 
-          {/* Practical Experience */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-bold flex items-center gap-2">
-              <Briefcase className="h-5 w-5" />
-              Practical Experience
-            </h3>
-            <div className="pl-7 space-y-3 text-sm">
-              <div>
-                <h4 className="font-semibold">Research and Development Intern</h4>
-                <p className="text-muted-foreground">HSS • Dec 2023 - May 2024</p>
-              </div>
-              <div>
-                <h4 className="font-semibold">Bug Bounty Hunter</h4>
-                <p className="text-muted-foreground">Active on platforms hunting vulnerabilities on live assets (Meta, Zomato)</p>
-              </div>
-              <div>
-                <h4 className="font-semibold">Security Training Platforms</h4>
-                <p className="text-muted-foreground">TryHackMe • LetsDefend.io • PicoCTF • PortSwigger Labs • Hack The Box</p>
-              </div>
-              <div>
-                <h4 className="font-semibold">IBM SkillsBuild Internship</h4>
-                <p className="text-muted-foreground">2-week online internship on CyberSecurity with CSRBOX</p>
-              </div>
-            </div>
-          </div>
-
           {/* Education */}
-          <div className="space-y-2">
-            <h3 className="text-lg font-bold flex items-center gap-2">
+          <div className="space-y-3">
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1 flex items-center gap-2">
               <GraduationCap className="h-5 w-5" />
               Education
             </h3>
-            <div className="pl-7 space-y-3 text-sm">
-              <div>
-                <h4 className="font-semibold">B.Tech in Computer Science and Business Systems</h4>
-                <p className="text-muted-foreground">Govt. Model Engineering College, KTU • Expected 2026</p>
-                <p className="text-muted-foreground">CGPA: 8.4</p>
+            <div className="space-y-3">
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-bold">B.Tech in Computer Science and Business Systems</h4>
+                  <p className="text-sm text-muted-foreground">Govt. Model Engineering College, Kerala Technological University (KTU)</p>
+                  <p className="text-sm font-semibold">CGPA: 8.4/10</p>
+                </div>
+                <p className="text-sm text-muted-foreground">Expected 2026</p>
               </div>
-              <div>
-                <h4 className="font-semibold">Higher Secondary Education (12th)</h4>
-                <p className="text-muted-foreground">St. Mary's CGHSS, Ernakulam • 2021 • 99%</p>
-              </div>
-              <div>
-                <h4 className="font-semibold">Secondary Education (10th)</h4>
-                <p className="text-muted-foreground">St. Mary's CGHSS, Ernakulam • 2019 • 100%</p>
+              <div className="flex justify-between items-start">
+                <div>
+                  <h4 className="font-bold">Higher Secondary Education (12th)</h4>
+                  <p className="text-sm text-muted-foreground">St. Mary's CGHSS, Ernakulam</p>
+                  <p className="text-sm font-semibold">Percentage: 99%</p>
+                </div>
+                <p className="text-sm text-muted-foreground">2021</p>
               </div>
             </div>
           </div>
 
           {/* Certifications */}
           <div className="space-y-2">
-            <h3 className="text-lg font-bold flex items-center gap-2">
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1 flex items-center gap-2">
               <Award className="h-5 w-5" />
               Certifications
             </h3>
-            <div className="pl-7">
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>Google Cybersecurity Professional Certificate</li>
-                <li>Ethical Hacking - NPTEL</li>
-                <li>CyberSecurity Fundamentals - IBM SkillsBuild</li>
-              </ul>
-            </div>
+            <ul className="list-disc list-inside text-sm space-y-1 ml-4">
+              <li><strong>Google Cybersecurity Professional Certificate</strong></li>
+              <li><strong>Ethical Hacking</strong> - NPTEL</li>
+              <li><strong>Cybersecurity Fundamentals</strong> - IBM SkillsBuild</li>
+            </ul>
           </div>
 
-          {/* Achievements */}
+          {/* Projects */}
           <div className="space-y-2">
-            <h3 className="text-lg font-bold flex items-center gap-2">
-              <Award className="h-5 w-5" />
-              Achievements
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1 flex items-center gap-2">
+              <Code className="h-5 w-5" />
+              Projects
             </h3>
-            <div className="pl-7">
-              <ul className="list-disc list-inside text-sm space-y-1">
-                <li>1st Position - Hack-For-Humanity Hackathon (YI-Yuva-MITS 2024)</li>
-                <li>Participant - Hac'KP Hackathon 2025 (Kerala Police Cyberdome)</li>
-                <li>Completed Advent of Cyber 2024 & 2023 (TryHackMe)</li>
-                <li>Participant - CodeRed CTF (Red Team Hacker Academy)</li>
-                <li>Participant - Tink-Her-Hack 2022 & 2.0 2023 (Tinker Hub Foundation)</li>
-              </ul>
+            <div className="space-y-3 text-sm">
+              {/* The Marauder's Map */}
+              <div>
+                <h4 className="font-bold">THE MARAUDER'S MAP</h4>
+                <p className="text-muted-foreground mt-1">
+                  Network Reconnaissance and Anomaly Detector - Python-based security application for proactive defense and monitoring with packet sniffing using Scapy, SQLite storage, and Flask web interface.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> Python, Scapy, Flask, SQLite
+                </p>
+              </div>
+
+              {/* LetsDefend SOC Simulation */}
+              <div>
+                <h4 className="font-bold">LETSDEFEND.IO - SOC ANALYST SIMULATION</h4>
+                <p className="text-muted-foreground mt-1">
+                  Simulated core SOC Analyst workflows focusing on rapid incident response, detection, and analysis using SIEM, Threat Intelligence, and Incident Response Playbooks for complex cases including malware and RCE exploitations.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> SIEM, Threat Intelligence, Incident Response
+                </p>
+              </div>
+
+              {/* Phishing Simulation Campaign */}
+              <div>
+                <h4 className="font-bold">PHISHING SIMULATION CAMPAIGN</h4>
+                <p className="text-muted-foreground mt-1">
+                  Security awareness campaign using GoPhish deployed on Railway with Mailtrap integration. Ethical hacking to measure human risk, create custom phishing content, and track user interaction via live dashboard.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> GoPhish, Railway, Mailtrap, Social Engineering
+                </p>
+              </div>
+
+              {/* FL-DP Framework */}
+              <div>
+                <h4 className="font-bold">FL-DP FRAMEWORK</h4>
+                <p className="text-muted-foreground mt-1">
+                  Secure Collaborative Machine Learning - Privacy and Security Research framework integrating Federated Learning (FL) and Differential Privacy (DP) to protect sensitive data across multi-client environments.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> Python, TensorFlow, Flower, PySyft
+                </p>
+              </div>
+
+              {/* SubWhisper */}
+              <div>
+                <h4 className="font-bold">SUBWHISPER</h4>
+                <p className="text-muted-foreground mt-1">
+                  Automated reconnaissance utility for bug bounty hunting. Integrates popular asset discovery tools (Subfinder, Assetfinder) into a single efficient workflow, improving speed and comprehensiveness of initial target analysis.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> Python, Subfinder, Assetfinder, Automation
+                </p>
+              </div>
+
+              {/* Aggrow */}
+              <div>
+                <h4 className="font-bold">AGGROW</h4>
+                <p className="text-muted-foreground mt-1">
+                  AI-driven web application for agricultural insights using ResNet (CNN) model with OpenCV and Scikit-learn. Built on Python/Flask stack for crop disease detection and farming recommendations.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> Python, Flask, ResNet, OpenCV, Scikit-learn
+                </p>
+              </div>
+
+              {/* BioSignals */}
+              <div>
+                <h4 className="font-bold">BIOSIGNALS</h4>
+                <p className="text-muted-foreground mt-1">
+                  Flask-based system using OpenCV to analyze animal behavior in real-time. Detects unusual patterns and triggers alerts for disaster prediction, demonstrating proficiency in Python, Flask, and computer vision.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> Python, Flask, OpenCV, Computer Vision
+                </p>
+              </div>
+
+              {/* Deadline Extractor */}
+              <div>
+                <h4 className="font-bold">DEADLINE EXTRACTOR</h4>
+                <p className="text-muted-foreground mt-1">
+                  Chrome extension that automatically extracts and organizes deadlines from Google Classroom. Streamlines academic task management by parsing assignment data and presenting it in an accessible format.
+                </p>
+                <p className="text-muted-foreground mt-1">
+                  <strong>Technologies:</strong> JavaScript, Chrome Extension API, HTML/CSS
+                </p>
+              </div>
             </div>
           </div>
 
-          {/* Skills */}
+          {/* Achievements & Competitions */}
           <div className="space-y-2">
-            <h3 className="text-lg font-bold">Technical Skills</h3>
-            <div className="pl-7">
-              <div className="grid grid-cols-2 gap-3 text-sm">
-                <div>
-                  <strong>Security:</strong> Penetration Testing, Network Security, Threat Intelligence, SIEM
-                </div>
-                <div>
-                  <strong>Tools:</strong> Burp Suite, Wireshark, Nmap, Scapy, GoPhish
-                </div>
-                <div>
-                  <strong>Languages:</strong> Python, C++, JavaScript, Bash
-                </div>
-                <div>
-                  <strong>Platforms:</strong> Linux, Windows, Git, Flask, Node.js
-                </div>
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1 flex items-center gap-2">
+              <Award className="h-5 w-5" />
+              Achievements & Competitions
+            </h3>
+            <div className="space-y-2 text-sm">
+              <div>
+                <p className="font-semibold">Hackathons:</p>
+                <ul className="list-disc list-inside ml-4 text-muted-foreground space-y-1">
+                  <li><strong>1st Position</strong> - Hack-For-Humanity Hackathon (YI-Yuva-MITS 2024)</li>
+                  <li>Participant - Hac'KP Hackathon 2025 (Kerala Police Cyberdome)</li>
+                  <li>Participant - Tink-Her-Hack 2022 & 2.0 2023 (Tinker Hub Foundation)</li>
+                </ul>
+              </div>
+              <div>
+                <p className="font-semibold">CTF Competitions:</p>
+                <ul className="list-disc list-inside ml-4 text-muted-foreground space-y-1">
+                  <li>Completed Advent of Cyber 2024 & 2023 (TryHackMe)</li>
+                  <li>Participant - CodeRed CTF (Red Team Hacker Academy)</li>
+                </ul>
               </div>
             </div>
           </div>
 
           {/* Interests */}
           <div className="space-y-2">
-            <h3 className="text-lg font-bold">Interests & Hobbies</h3>
-            <div className="pl-7 text-sm">
-              <p><strong>Professional:</strong> Cybersecurity, Backend Development, AI in Security, Bug Bounty Hunting, Agentic AI</p>
-              <p className="mt-2"><strong>Personal:</strong> Music, Reading Articles</p>
+            <h3 className="text-lg font-bold uppercase border-b-2 border-primary pb-1">Areas of Interest</h3>
+            <div className="text-sm">
+              <p><strong>Professional:</strong> Cybersecurity, Backend Development, AI in Security, Bug Bounty Hunting, Agentic AI, Secure Systems Design</p>
+              <p className="mt-1"><strong>Personal:</strong> Music, Reading Technical Articles, Open Source Contributions</p>
             </div>
           </div>
         </div>

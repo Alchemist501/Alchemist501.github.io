@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400..900;1,400..900&family=Lora:ital,wght@0,400..700;1,400..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
@@ -11,88 +12,88 @@ All colors MUST be HSL.
     /* Light Theme - Default */
     --background: 0 0% 100%;
     --foreground: 0 0% 10%;
-    
+
     --card: 0 0% 100%;
     --card-foreground: 0 0% 10%;
-    
+
     --popover: 0 0% 100%;
     --popover-foreground: 0 0% 10%;
-    
+
     --primary: 0 0% 10%;
     --primary-foreground: 0 0% 100%;
-    
+
     --secondary: 0 0% 96%;
     --secondary-foreground: 0 0% 10%;
-    
+
     --muted: 0 0% 96%;
     --muted-foreground: 0 0% 45%;
-    
+
     --accent: 0 0% 96%;
     --accent-foreground: 0 0% 10%;
-    
+
     --destructive: 0 84% 60%;
     --destructive-foreground: 0 0% 98%;
-    
+
     --border: 0 0% 90%;
     --input: 0 0% 90%;
     --ring: 0 0% 10%;
-    
+
     --radius: 0.5rem;
   }
-  
+
   .dark {
     /* HackerTyper.net Inspired Theme - Pure Black with Bright Green */
     --background: 0 0% 0%;
     --foreground: 120 100% 50%;
-    
+
     --card: 0 0% 3%;
     --card-foreground: 120 100% 50%;
-    
+
     --popover: 0 0% 2%;
     --popover-foreground: 120 100% 50%;
-    
+
     /* Bright Hacker Green Primary */
     --primary: 120 100% 50%;
     --primary-foreground: 0 0% 0%;
-    
+
     /* Dim Green Secondary */
     --secondary: 120 100% 30%;
     --secondary-foreground: 0 0% 0%;
-    
+
     --muted: 0 0% 10%;
     --muted-foreground: 120 100% 30%;
-    
+
     /* Accent - Bright Green */
     --accent: 120 100% 60%;
     --accent-foreground: 0 0% 0%;
-    
+
     /* Destructive - Hot Red */
     --destructive: 0 100% 50%;
     --destructive-foreground: 0 0% 100%;
-    
+
     --border: 120 100% 20%;
     --input: 0 0% 5%;
     --ring: 120 100% 50%;
-    
+
     --radius: 0.25rem;
-    
+
     /* Custom Cyber Colors */
     --cyber-green: 120 100% 50%;
     --cyber-green-dim: 120 100% 30%;
     --cyber-green-glow: 120 100% 50%;
-    
+
     --cyber-blue: 200 100% 50%;
     --cyber-blue-dim: 200 100% 30%;
-    
+
     --cyber-cyan: 180 100% 50%;
     --cyber-purple: 280 100% 60%;
     --cyber-pink: 330 100% 60%;
-    
+
     --cyber-red: 0 100% 50%;
-    
+
     --terminal-bg: 0 0% 0%;
     --terminal-text: 120 100% 50%;
-    
+
     /* Glow Effects */
     --glow-primary: 0 0 20px hsl(120 100% 50% / 0.5);
     --glow-secondary: 0 0 20px hsl(120 100% 30% / 0.5);
@@ -109,88 +110,89 @@ All colors MUST be HSL.
     @apply bg-background text-foreground;
     overflow-x: hidden;
   }
-  
+
   /* Default Light Mode Font */
   body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   }
-  
+
   /* Dark Mode - Use Monospace Everywhere */
   .dark body {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
   }
-  
+
   /* Terminal/Monospace Typography */
   .font-mono {
     font-family: 'JetBrains Mono', 'Courier New', monospace;
   }
-  
+
   /* Cyber Glow Effects */
   .glow-green {
     text-shadow: 0 0 10px hsl(120 100% 50% / 0.8),
-                 0 0 20px hsl(120 100% 50% / 0.5),
-                 0 0 30px hsl(120 100% 50% / 0.3);
+      0 0 20px hsl(120 100% 50% / 0.5),
+      0 0 30px hsl(120 100% 50% / 0.3);
   }
-  
+
   .glow-blue {
     text-shadow: 0 0 10px hsl(200 100% 50% / 0.8),
-                 0 0 20px hsl(200 100% 50% / 0.5),
-                 0 0 30px hsl(200 100% 50% / 0.3);
+      0 0 20px hsl(200 100% 50% / 0.5),
+      0 0 30px hsl(200 100% 50% / 0.3);
   }
-  
+
   .glow-cyan {
     text-shadow: 0 0 10px hsl(180 100% 50% / 0.8),
-                 0 0 20px hsl(180 100% 50% / 0.5),
-                 0 0 30px hsl(180 100% 50% / 0.3);
+      0 0 20px hsl(180 100% 50% / 0.5),
+      0 0 30px hsl(180 100% 50% / 0.3);
   }
-  
+
   .glow-purple {
     text-shadow: 0 0 10px hsl(280 100% 60% / 0.8),
-                 0 0 20px hsl(280 100% 60% / 0.5),
-                 0 0 30px hsl(280 100% 60% / 0.3);
+      0 0 20px hsl(280 100% 60% / 0.5),
+      0 0 30px hsl(280 100% 60% / 0.3);
   }
-  
+
   .glow-pink {
     text-shadow: 0 0 10px hsl(330 100% 60% / 0.8),
-                 0 0 20px hsl(330 100% 60% / 0.5),
-                 0 0 30px hsl(330 100% 60% / 0.3);
+      0 0 20px hsl(330 100% 60% / 0.5),
+      0 0 30px hsl(330 100% 60% / 0.3);
   }
-  
+
   .glow-accent {
     text-shadow: 0 0 10px hsl(var(--accent) / 0.8),
-                 0 0 20px hsl(var(--accent) / 0.5),
-                 0 0 30px hsl(var(--accent) / 0.3);
+      0 0 20px hsl(var(--accent) / 0.5),
+      0 0 30px hsl(var(--accent) / 0.3);
   }
-  
+
   /* Pulsing Animation */
   @keyframes pulse-glow {
-    0%, 100% {
+
+    0%,
+    100% {
       opacity: 1;
       filter: brightness(1);
     }
+
     50% {
       opacity: 0.8;
       filter: brightness(1.2);
     }
   }
-  
+
   .pulse-glow {
     animation: pulse-glow 2s ease-in-out infinite;
   }
-  
+
   /* Scanline Effect */
   .scanlines {
     position: relative;
   }
-  
+
   .scanlines::before {
     content: '';
     position: absolute;
     inset: 0;
-    background: linear-gradient(
-      transparent 50%,
-      rgba(0, 255, 65, 0.03) 50%
-    );
+    background: linear-gradient(transparent 50%,
+        rgba(0, 255, 65, 0.03) 50%);
     background-size: 100% 4px;
     pointer-events: none;
     z-index: 1;

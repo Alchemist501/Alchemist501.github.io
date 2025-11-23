@@ -4,11 +4,14 @@ import { Home } from "lucide-react";
 
 interface TerminalProps {
   onCommand: (command: string) => void;
+  zIndex?: number;
+  onFocus?: () => void;
+  onResize?: (width: number | null, height: number) => void;
 }
 
 // File system structure
 const fileSystem: Record<string, string[]> = {
-  "~": ["about/", "projects/", "skills/", "achievements/", "experience/", "contact/"],
+  "~": ["about/", "projects/", "skills/", "achievements/", "experience/", "contact/", "blog/"],
   "~/about": ["offensive_security.txt", "secure_systems.txt", "security_operations.txt"],
   "~/projects": ["marauders_map.txt", "letsdefend_soc.txt", "phishing_campaign.txt", "fl_dp_framework.txt", "subwhisper.txt", "aggrow.txt", "biosignals.txt", "deadline_extractor.txt"],
   "~/skills": ["security/", "tools/", "languages/", "platforms/"],
@@ -23,7 +26,7 @@ const fileSystem: Record<string, string[]> = {
   "~/contact": ["email.txt", "linkedin.txt", "github.txt"],
 };
 
-export const Terminal = ({ onCommand }: TerminalProps) => {
+export const Terminal = ({ onCommand, zIndex = 40, onFocus, onResize }: TerminalProps) => {
   const [input, setInput] = useState("");
   const [history, setHistory] = useState<string[]>([
     "Welcome to CyberSec Terminal v2.0",
@@ -42,7 +45,7 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
   const terminalRef = useRef<HTMLDivElement>(null);
 
   const sections = ["about", "projects", "skills", "achievements", "experience", "contact"];
-  const availableCommands = ["help", "ls", "cd", "pwd", "about", "projects", "skills", "achievements", "experience", "contact", "clear"];
+  const availableCommands = ["help", "ls", "cd", "pwd", "about", "projects", "skills", "achievements", "experience", "contact", "blog", "clear"];
 
   // Binary animation effect
   useEffect(() => {
@@ -65,6 +68,7 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
       "  achievements - View my achievements",
       "  experience   - View my experience",
       "  contact      - Get in touch",
+      "  blog         - Read my blog",
       "  clear        - Clear terminal",
     ],
     ls: () => {
@@ -87,7 +91,7 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
 
     // Autocomplete suggestions
     if (value.trim()) {
-      const matches = availableCommands.filter(cmd => 
+      const matches = availableCommands.filter(cmd =>
         cmd.startsWith(value.toLowerCase())
       );
       setSuggestions(matches);
@@ -129,7 +133,7 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
           parts.pop();
           const newDir = parts.join("/") || "~";
           setCurrentDir(newDir);
-          
+
           // If we're back at root, show network
           if (newDir === "~") {
             setHistory((prev) => [...prev, "Navigating to home..."]);
@@ -142,11 +146,11 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
         // Try to navigate to target
         const newPath = currentDir === "~" ? `~/${target}` : `${currentDir}/${target}`;
         const normalizedPath = newPath.replace(/\/$/, ""); // Remove trailing slash
-        
+
         if (fileSystem[normalizedPath]) {
           setCurrentDir(normalizedPath);
           setHistory((prev) => [...prev, `Navigating to ${normalizedPath}...`]);
-          
+
           // Navigate to section view if it's a top-level section
           const topLevelSection = normalizedPath.replace("~/", "").split("/")[0];
           if (sections.includes(topLevelSection)) {
@@ -167,6 +171,9 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
       setCurrentDir(`~/${cmd}`);
       setHistory((prev) => [...prev, `Navigating to ${cmd}...`]);
       onCommand(cmd);
+    } else if (cmd === "blog") {
+      setHistory((prev) => [...prev, "Navigating to blog..."]);
+      window.location.href = "/blog";
     } else {
       setHistory((prev) => [...prev, `Command not found: ${cmd}`, "Type 'help' for available commands"]);
     }
@@ -220,8 +227,15 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
     };
   }, [isResizing, isResizingWidth]);
 
-  const handleTerminalClick = () => {
+  // Report size changes
+  useEffect(() => {
+    onResize?.(terminalWidth, terminalHeight);
+  }, [terminalWidth, terminalHeight, onResize]);
+
+  const handleTerminalClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
     setIsFocused(true);
+    onFocus?.();
   };
 
   const handleTerminalDoubleClick = () => {
@@ -242,15 +256,14 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
       initial={{ y: 100, opacity: 0 }}
       animate={{ y: 0, opacity: 1 }}
       transition={{ delay: 0.5 }}
-      style={{ 
+      className={`fixed bottom-0 bg-black/98 backdrop-blur-sm border-2 border-primary font-mono text-sm overflow-hidden shadow-[0_0_30px_rgba(0,255,65,0.3)] ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
+      style={{
         height: `${terminalHeight}px`,
         width: terminalWidth ? `${terminalWidth}px` : undefined,
         left: terminalWidth ? `${(window.innerWidth - terminalWidth) / 2}px` : 0,
         right: terminalWidth ? 'auto' : 0,
+        zIndex: zIndex
       }}
-      className={`fixed bottom-0 bg-black/98 backdrop-blur-sm border-2 border-primary font-mono text-sm overflow-hidden shadow-[0_0_30px_rgba(0,255,65,0.3)] ${
-        isFocused ? 'z-[100]' : 'z-40'
-      } ${isDragging ? 'cursor-grabbing' : 'cursor-grab'}`}
     >
       {/* Resize Handles */}
       {/* Top resize handle */}
@@ -289,7 +302,7 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
         <div className="absolute inset-0 opacity-5 text-[hsl(180,100%,50%)] text-[8px] whitespace-nowrap overflow-hidden">
           {binaryAnimation}
         </div>
-        
+
         <div className="flex items-center gap-2 relative z-10">
           <div className="w-3 h-3 rounded-full bg-[hsl(0,100%,50%)]" />
           <div className="w-3 h-3 rounded-full bg-[hsl(60,100%,50%)]" />
@@ -317,16 +330,15 @@ export const Terminal = ({ onCommand }: TerminalProps) => {
           const isCommand = line.includes('>');
           const isError = line.toLowerCase().includes('not found') || line.toLowerCase().includes('error');
           const isSuccess = line.toLowerCase().includes('navigating');
-          
+
           return (
-            <div 
-              key={i} 
-              className={`mb-1 ${
-                isCommand ? 'text-[hsl(180,100%,50%)] glow-cyan' : 
+            <div
+              key={i}
+              className={`mb-1 ${isCommand ? 'text-[hsl(180,100%,50%)] glow-cyan' :
                 isError ? 'text-[hsl(0,100%,50%)]' :
-                isSuccess ? 'text-[hsl(330,100%,60%)] glow-pink' :
-                'text-primary'
-              }`}
+                  isSuccess ? 'text-[hsl(330,100%,60%)] glow-pink' :
+                    'text-primary'
+                }`}
             >
               {line}
             </div>
