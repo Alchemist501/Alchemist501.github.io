@@ -1,4 +1,5 @@
 import { useRef, useState } from "react";
+import { createPortal } from "react-dom";
 import { Canvas, useFrame } from "@react-three/fiber";
 import { OrbitControls, Sphere, Line } from "@react-three/drei";
 import * as THREE from "three";
@@ -113,13 +114,13 @@ export const NetworkGraph = () => {
         <Scene onNodeClick={setSelectedNode} />
       </Canvas>
 
-      {/* Node Info Popup */}
-      {selectedNode && (
+      {/* Node Info Popup - Rendered via Portal to avoid clipping */}
+      {selectedNode && createPortal(
         <motion.div
           initial={{ opacity: 0, scale: 0.8 }}
           animate={{ opacity: 1, scale: 1 }}
           exit={{ opacity: 0, scale: 0.8 }}
-          className="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card border-2 border-primary p-6 rounded-lg z-50 min-w-80 pointer-events-auto"
+          className="fixed top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 bg-card border-2 border-primary p-4 md:p-6 rounded-lg z-[9999] w-[90%] max-w-md pointer-events-auto shadow-2xl"
         >
           <h2 className="text-2xl font-bold mb-2 glow-green">{selectedNode.label}</h2>
           <p className="text-muted-foreground mb-4">
@@ -144,7 +145,8 @@ export const NetworkGraph = () => {
           >
             Close
           </button>
-        </motion.div>
+        </motion.div>,
+        document.body
       )}
 
       {/* Data Stream Overlay */}

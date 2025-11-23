@@ -31,7 +31,7 @@ export const LightPortfolio = () => {
       org: "Kerala Police Cyberdome",
       description: "Won Hac'KP 2025 organized by Kerala Police Cyberdome",
       link: "https://www.linkedin.com/posts/alchemist501_have-you-ever-thought-about-using-tech-to-activity-7381365809153155072-sRc8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
-      image: "/assets/Achievments/Hackp.jpg" 
+      image: "/assets/Achievments/Hackp.jpg"
     },
     {
       emoji: "🏆",
@@ -39,7 +39,7 @@ export const LightPortfolio = () => {
       org: "YI-Yuva-MITS",
       description: "Won first place in hackathon focused on humanitarian tech solutions",
       link: "https://www.linkedin.com/posts/alchemist501_hackforhumanity-hackathon-techforgood-activity-7250835679587262464--tMF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
-      image: "/assets/Achievments/MITS.jpg" 
+      image: "/assets/Achievments/MITS.jpg"
     },
     {
       emoji: "👩‍💻",
@@ -65,7 +65,7 @@ export const LightPortfolio = () => {
       link: "https://www.linkedin.com/posts/alchemist501_cybersecurity-ibm-csrbox-activity-7266151883910582272-3W1j?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
       image: "/assets/Achievments/IBM.jpg"
     },
-    
+
     {
       emoji: "🚩",
       title: "CodeRed CTF",
@@ -161,7 +161,8 @@ export const LightPortfolio = () => {
   return (
     <div className="min-h-screen bg-white text-gray-900">
       {/* Navigation Header */}
-      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled ? "bg-white/90 backdrop-blur-md shadow-sm py-4" : "bg-transparent py-6"}`}>
+      {/* Navigation Header */}
+      <header className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${scrolled || mobileMenuOpen ? "bg-white/90 backdrop-blur-md shadow-sm py-4" : "bg-transparent py-6"}`}>
         <nav className="w-full px-4 lg:px-8">
           <div className="flex items-center justify-between">
             <motion.div
@@ -170,7 +171,11 @@ export const LightPortfolio = () => {
               key={scrolled ? "name" : "question"}
               className={`transition-all duration-300 ${!scrolled ? "font-lora italic font-bold text-lg md:text-xl" : "font-playfair text-2xl md:text-3xl font-bold"}`}
             >
-              {scrolled ? "SIYA P P" : "Want to know more about me?"}
+              {/* Show "SIYA P P" on mobile only when scrolled, or the question on desktop if not scrolled */}
+              <span className="md:hidden">{scrolled ? "SIYA P P" : ""}</span>
+              <span className="hidden md:inline">
+                {scrolled ? "SIYA P P" : "Want to know more about me?"}
+              </span>
             </motion.div>
 
             {/* Desktop Navigation */}
@@ -225,24 +230,24 @@ export const LightPortfolio = () => {
             <motion.div
               initial={{ opacity: 0, y: -20 }}
               animate={{ opacity: 1, y: 0 }}
-              className="md:hidden mt-4 pb-4 space-y-3 font-lora italic font-bold text-lg"
+              className="md:hidden mt-4 pb-4 space-y-3 font-lora italic font-bold text-lg bg-white border-t border-gray-100 shadow-lg absolute left-0 right-0 px-4 top-full"
             >
-              <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('about')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors border-b border-gray-50">
                 About
               </button>
-              <button onClick={() => scrollToSection('projects')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('projects')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors border-b border-gray-50">
                 Projects
               </button>
-              <button onClick={() => scrollToSection('skills')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('skills')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors border-b border-gray-50">
                 Skills
               </button>
-              <button onClick={() => scrollToSection('achievements')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('achievements')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors border-b border-gray-50">
                 Achievements
               </button>
-              <button onClick={() => scrollToSection('experience')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('experience')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors border-b border-gray-50">
                 Experience
               </button>
-              <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors">
+              <button onClick={() => scrollToSection('contact')} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors border-b border-gray-50">
                 Contact
               </button>
               <Link to={isProfessional ? "/professional/blog" : "/blog"} className="block w-full text-left py-2 text-gray-700 hover:text-gray-900 transition-colors">

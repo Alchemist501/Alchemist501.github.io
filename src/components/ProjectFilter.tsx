@@ -16,6 +16,7 @@ interface Project {
   category: "security" | "other";
   demo?: string;
   github?: string;
+  link?: string;
   image?: string;
 }
 
@@ -25,32 +26,32 @@ const projects: Project[] = [
     description: "Network Reconnaissance and Anomaly Detector - Python-based security application for proactive defense and monitoring with packet sniffing using Scapy, SQLite storage, and Flask web interface.",
     tech: ["Python", "Scapy", "Flask", "SQLite"],
     category: "security",
-    github: "https://github.com/siyapp",
-    image: "/assets/MarauderMap.png",
+    github: "https://github.com/Alchemist501/MischiefManaged-Net",
+    image: "/assets/Projects/MarauderMap.png",
   },
   {
     title: "LETSDEFEND.IO - SOC ANALYST SIMULATION",
     description: "Simulated core SOC Analyst workflows focusing on rapid incident response, detection, and analysis using SIEM, Threat Intelligence, and Incident Response Playbooks for complex cases including malware and RCE exploitations.",
     tech: ["SIEM", "Threat Intelligence", "Incident Response"],
+    link: "https://app.letsdefend.io/user/holocrypt404",
     category: "security",
-    demo: "https://letsdefend.io",
-    image: "/assets/SOCSimulation.png",
+    image: "/assets/Projects/SOCSimulation.png",
   },
   {
     title: "PHISHING SIMULATION CAMPAIGN",
     description: "Security awareness campaign using GoPhish deployed on Railway with Mailtrap integration. Ethical hacking to measure human risk, create custom phishing content, and track user interaction via live dashboard.",
     tech: ["GoPhish", "Railway", "Mailtrap", "Social Engineering"],
     category: "security",
-    github: "https://github.com/siyapp",
-    image: "/assets/GoPhish2.jpg",
+    link: "https://www.linkedin.com/posts/alchemist501_mailhog-gophish-cybersecurity-activity-7361269385069490176-VV4f?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
+    image: "/assets/Projects/GoPhish2.jpg",
   },
   {
     title: "FL-DP FRAMEWORK",
     description: "Secure Collaborative Machine Learning - Privacy and Security Research framework integrating Federated Learning (FL) and Differential Privacy (DP) to protect sensitive data across multi-client environments.",
     tech: ["Python", "TensorFlow", "Flower", "PySyft"],
     category: "security",
-    // github: "https://github.com/siyapp",
-    image: "/assets/FL-DP.png"
+    link: "https://www.linkedin.com/posts/alchemist501_federatedlearning-differentialprivacy-tcs-activity-7388611816085610496-4fSQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
+    image: "/assets/Projects/FL-DP.png"
   },
   {
     title: "SUBWHISPER",
@@ -58,7 +59,7 @@ const projects: Project[] = [
     tech: ["Python", "Subfinder", "Assetfinder", "Automation"],
     category: "security",
     github: "https://github.com/siyapp",
-    image: "/assets/SubWhisper.jpg"
+    image: "/assets/Projects/SubWhisper.jpg"
   },
   {
     title: "AGGROW",
@@ -74,8 +75,8 @@ const projects: Project[] = [
     tech: ["Python", "Flask", "OpenCV", "Computer Vision"],
     category: "other",
     github: "https://github.com/siyapp",
-    image: "/assets/BioSignals.gif",
-    demo: "/assets/BioSignals.mp4"
+    image: "/assets/Projects/BioSignals.gif",
+    demo: "/assets/Projects/BioSignals.mp4"
   },
   {
     title: "DEADLINE EXTRACTOR AI AGENT",
@@ -83,7 +84,7 @@ const projects: Project[] = [
     tech: ["Python", "NLP", "NLTK", "SpaCy", "Gmail API"],
     category: "other",
     github: "https://github.com/siyapp",
-    image: "/assets/Deadline.jpg"
+    image: "/assets/Projects/Deadline.jpg"
   },
 ];
 
@@ -450,7 +451,21 @@ export const ProjectFilter = ({ theme = "dark", onInteraction, layout = "grid" }
                       }`}
                   >
                     <Github className="w-5 h-5" />
-                    <span>View Code</span>
+                    <span>GitHub</span>
+                  </a>
+                )}
+                {selectedProjectForDetails.link && (
+                  <a
+                    href={selectedProjectForDetails.link}
+                    target="_blank"
+                    rel="noopener noreferrer"
+                    className={`flex items-center gap-2 px-4 py-2 rounded-lg font-mono transition-colors ${isDark
+                      ? "bg-primary/20 text-primary border border-primary/50 hover:bg-primary hover:text-background"
+                      : "bg-gray-900 text-white hover:bg-gray-700"
+                      }`}
+                  >
+                    <ExternalLink className="w-5 h-5" />
+                    <span>View Details</span>
                   </a>
                 )}
                 {selectedProjectForDetails.demo && (
