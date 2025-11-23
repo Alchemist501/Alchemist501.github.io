@@ -2,8 +2,8 @@
 title: "Advent of Cyber 2025: Warm-Up Challenges 1-10"
 date: "2025-11-22"
 excerpt: "A comprehensive walkthrough of the first 10 warm-up challenges from TryHackMe's Advent of Cyber 2025, covering password security, malware analysis, Linux/Windows forensics, and more."
-coverImage: "/assets/AoD25.jpg"
-headerImage: "/assets/AoCHeader.jpg"
+coverImage: "/assets/blog/AoD25.jpg"
+headerImage: "/assets/blog/AoCHeader.jpg"
 tags: ["CTF", "Cybersecurity", "TryHackMe", "Walkthrough"]
 ---
 

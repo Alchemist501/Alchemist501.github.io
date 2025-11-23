@@ -434,7 +434,7 @@ const DarkModeContent = ({
                       org: "Kerala Police Cyberdome",
                       description: "Won Hac'KP 2025 organized by Kerala Police Cyberdome",
                       link: "https://www.linkedin.com/posts/alchemist501_have-you-ever-thought-about-using-tech-to-activity-7381365809153155072-sRc8?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
-                      image: "/assets/Achievments/Hackp.jpg" 
+                      image: "/assets/Achievments/Hackp.jpg"
                     },
                     {
                       emoji: "🏆",
@@ -442,7 +442,7 @@ const DarkModeContent = ({
                       org: "YI-Yuva-MITS",
                       description: "Won first place in hackathon focused on humanitarian tech solutions",
                       link: "https://www.linkedin.com/posts/alchemist501_hackforhumanity-hackathon-techforgood-activity-7250835679587262464--tMF?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
-                      image: "/assets/Achievments/MITS.jpg" 
+                      image: "/assets/Achievments/MITS.jpg"
                     },
                     {
                       emoji: "👩‍💻",
@@ -468,7 +468,7 @@ const DarkModeContent = ({
                       link: "https://www.linkedin.com/posts/alchemist501_cybersecurity-ibm-csrbox-activity-7266151883910582272-3W1j?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
                       image: "/assets/Achievments/IBM.jpg"
                     },
-                    
+
                     {
                       emoji: "🚩",
                       title: "CodeRed CTF",
@@ -491,8 +491,21 @@ const DarkModeContent = ({
                       className={`bg-card border border-primary/30 rounded-lg overflow-hidden hover:border-primary transition-all group cursor-pointer content-card ${focusedElement === `achievement-${i}` ? 'z-50 scale-105 shadow-[0_0_40px_rgba(0,255,65,0.5)]' : 'z-10'
                         }`}
                     >
-                      <div className="aspect-video bg-primary/10 flex items-center justify-center text-6xl">
-                        {achievement.emoji}
+                      <div className="aspect-video bg-primary/10 flex items-center justify-center overflow-hidden relative group-hover:scale-105 transition-transform duration-500">
+                        {achievement.image ? (
+                          <img
+                            src={achievement.image}
+                            alt={achievement.title}
+                            className="w-full h-full object-cover"
+                            onError={(e) => {
+                              e.currentTarget.style.display = 'none';
+                              e.currentTarget.nextElementSibling?.classList.remove('hidden');
+                            }}
+                          />
+                        ) : null}
+                        <div className={`text-6xl ${achievement.image ? 'hidden' : ''} absolute inset-0 flex items-center justify-center bg-primary/10`}>
+                          {achievement.emoji}
+                        </div>
                       </div>
                       <div className="p-4">
                         <h3 className="text-lg font-bold text-primary font-mono mb-1">{achievement.title}</h3>
