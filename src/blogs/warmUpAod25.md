@@ -120,12 +120,11 @@ We located the concealed text file and displayed its contents to reveal the mess
 ### 📝 Walkthrough
 We entered his home directory and used `ls -la` to reveal hidden files:
 
-```bash
-cd ~
-ls -la
-cat .secret_message
-```
+* `cd ~`
+* `ls -la`
+* `cat .secret_message`
 
+![Task5](assets/blog/Task5.png)
 We found `.secret_message` and read its contents.
 
 **🚩 Flag Captured!**
@@ -140,11 +139,11 @@ We found `.secret_message` and read its contents.
 
 > **Scenario:** Rumors are spreading that TBFC staff emails were leaked online. McSkidy fears his email might be part of a breach.
 
-**Objective:** Check if McSkidy’s email was compromised.
+**Objective:** Check if McSkidy’s email was compromised using **Have I Been Pwned**
 
 ### 📝 Walkthrough
-We entered `mcskidy@tbfc.com` into a breach-checking tool and reviewed the compromised domain indicators. Once the correct breach entry was identified, we confirmed the leak.
-
+We entered `mcskidy@tbfc.com` into *Have I Been Pwned*  and reviewed the compromised domain indicators. Once the correct breach entry was identified, we confirmed the leak.
+![Task6](assets/blog/Task6.png)
 **🚩 Flag Captured!**
 
 ### 🔑 Key Takeaways
@@ -166,6 +165,7 @@ We accessed the router using the classic default credentials:
 - **Password:** `admin`
 
 We navigated to the security settings and updated the password to a strong one.
+![Task 7](assets/blog/Task7.png)
 
 **🚩 Flag Captured!**
 
@@ -187,7 +187,7 @@ We reviewed all connected apps:
 - Gift Tracker
 - **Eastmas Scheduler** (Suspicious!)
 
-*Eastmas Scheduler* had suspicious permissions, including **password vault access**. After revoking it, the account was secured.
+*Eastmas Scheduler* had suspicious permissions, including **password vault access**. ![Task 8](assets/blog/Task8.png)After revoking it, the account was secured.
 
 **🚩 Flag Captured!**
 
@@ -208,6 +208,8 @@ We chatted with the bot and analyzed its responses. We found it leaking:
 1.  An internal **admin URL**
 2.  Email **login credentials**
 3.  A **service token**
+Select those responses and click Submit.
+![alt text](assets/blog/Task9.png)
 
 **🚩 Flag Captured!**
 
@@ -229,7 +231,7 @@ We reviewed the web server logs line by line and spotted an abnormal user agent:
 `BunnyOS/1.0 (HopSecBot)` accessing `/admin/panel`
 
 Upon identifying this rogue request among the normal traffic, we confirmed the intrusion attempt.
-
+![Task 10](assets/blog/Task10.png)
 **🚩 Flag Captured!**
 
 ### 🔑 Key Takeaways
@@ -242,5 +244,6 @@ Upon identifying this rogue request among the normal traffic, we confirmed the i
 
 These warm-up challenges introduced a range of essential cybersecurity skills, from Linux navigation and Windows command-line usage to breach detection, network security, log analysis, and app permission auditing.
 
-Documenting them as a single blog demonstrates both practical ability and clear technical communication — something that employers look for. **Happy Hacking!** 🎄
+Documenting them as a single blog demonstrates both practical ability and clear technical communication — something that employers look for. 
 
+**Happy Hacking!** 🎄
