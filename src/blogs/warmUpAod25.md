@@ -48,7 +48,7 @@ After constructing a sufficiently strong password that met all criteria, we subm
 ### 📝 Walkthrough
 1.  Click on View Site.
 1.  Click the scan button to scan the `.exe` file.
-![Task2](../../public/assets/blog/Task2.png)
+![Task2](assets/blog/Task2.png)
 2.  Malhare Labs has already reported it as suspicious.
 2.  Click on Malicious.
 3.  You caught the first whiff of Malhare's mischief. The file was bait!
