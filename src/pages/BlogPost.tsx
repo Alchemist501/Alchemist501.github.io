@@ -2,6 +2,7 @@ import { useEffect, useState } from "react";
 import { useParams, Link, useLocation } from "react-router-dom";
 import { getBlogBySlug, BlogPost as BlogPostType } from "@/lib/blog";
 import ReactMarkdown from "react-markdown";
+import remarkGfm from "remark-gfm";
 import { motion } from "framer-motion";
 import { ArrowLeft, Calendar, Tag, User } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
@@ -84,7 +85,7 @@ const BlogPost = () => {
                         ? 'prose-invert prose-headings:text-primary prose-a:text-accent prose-strong:text-primary prose-code:text-accent'
                         : 'prose-headings:text-gray-900 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:text-gray-800'
                         }`}>
-                        <ReactMarkdown>{blog.content}</ReactMarkdown>
+                        <ReactMarkdown remarkPlugins={[remarkGfm]}>{blog.content}</ReactMarkdown>
                     </div>
                 </motion.div>
             </article>

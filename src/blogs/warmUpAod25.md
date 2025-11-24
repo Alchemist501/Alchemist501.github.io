@@ -17,7 +17,9 @@ Here is my write-up for challenges 1 through 10.
 
 # 1. Password Pandemonium 🔐
 
-> **Scenario:** McSkidy is trying to secure his accounts before the holiday rush, but the system is rejecting his weak password attempts. To proceed with his preparations at TBFC, he must create a strong password.
+> **Scenario:** McSkidy is trying to secure his accounts before the holiday rush, but the system is rejecting his weak password attempts. To proceed with his preparations at TBFC (*The Best Festival Company*), he must create a strong password.
+
+![McSkidy](../../public/assets/blog/Task1.jpg)
 
 **Objective:** Help McSkidy craft a secure password that the system will accept.
 
@@ -39,64 +41,66 @@ After constructing a sufficiently strong password that met all criteria, we subm
 
 ## 2. The Suspicious Chocolate.exe 🍫
 
-> **Scenario:** TBFC received a mysterious file named `Chocolate.exe`. McSkidy suspects something is off — the file arrived unexpectedly and could be malicious.
+> **Scenario:** A shiny USB labelled “SOCMAS Party Playlist” appears on your desk. Inside is a mysterious file called `chocolate.exe`. McSkidy suspects something is off — the file arrived unexpectedly and could be malicious.
 
-**Objective:** Investigate the suspicious Windows executable.
+**Objective:** Investigate the suspicious Windows executable using *VirusTotal*.
 
 ### 📝 Walkthrough
-1.  Downloaded the file.
-2.  Inspected its **metadata**.
-3.  Checked its **hash** against threat databases.
+1.  Click on View Site.
+1.  Click the scan button to scan the `.exe` file.
+![Task2](../../public/assets/blog/Task2.png)
+2.  Malhare Labs has already reported it as suspicious.
+2.  Click on Malicious.
+3.  You caught the first whiff of Malhare's mischief. The file was bait!
 
 The behavior looked suspicious, and after analyzing it fully, we confirmed its malicious nature.
 
 **🚩 Flag Captured!**
 
 ### 🔑 Key Takeaways
-*   **Hash It:** Hashing and comparing files helps quickly detect known malware.
 *   **Triage First:** Initial triage is essential before deeper analysis.
 
 ---
 
 ## 3. Welcome to the AttackBox 🖥️
 
-> **Scenario:** McSkidy is onboarding new analysts, but one of the welcome notes is missing from the AttackBox environment. Someone hid it inside the filesystem.
+> **Scenario:** You step into TBFC’s AttackBox, a secure virtual environment built for training. The system hums quietly, waiting for your first command.
 
 **Objective:** Find the hidden welcome message.
 
 ### 📝 Walkthrough
-We navigated into the challenges directory and listed the available files:
+1. Click on View Site.
+2. We navigated into the challenges directory and listed the available files:
 
-```bash
-cd challenges
-ls -la
-cat .welcome_msg
-```
-
+    * *cd challenges* 
+    * *ls -la*
+    * *cat .welcome_msg*
+![Task3](../../public/assets/blog/Task3.png)
 After viewing the hidden message using standard Linux commands, we found the flag.
 
 **🚩 Flag Captured!**
 
 ### 🔑 Key Takeaways
 *   **Navigation:** Basic Linux navigation is vital in cybersecurity work.
-*   **Hidden Files:** Hidden or misplaced files often contain hints (`.` prefix in Linux).
+*   **Display Content in  Files:** Content inside a text file can be displayed using `cat` command. 
 
 ---
 
 ## 4. The CMD Conundrum 💻
 
-> **Scenario:** A Windows system at TBFC has an unusual directory with hidden contents. McSkidy thinks someone left a clue inside.
+> **Scenario:** McSkidy’s workstation shows signs of tampering, suspicious files moved, logs wiped, and a strange folder named mystery_data. It’s time to use the Windows Command Prompt to uncover what’s hidden.
 
 **Objective:** Reveal and read hidden files using Windows CMD.
 
 ### 📝 Walkthrough
-Using the command prompt, we displayed hidden files in the directory:
+1. Click on View Site
+2. Using the command prompt, we displayed hidden files in the directory:
+    * *dir*
+    * *cd mystery_data*
+    * *dir /a*
+    * *type hidden_flag.txt*
 
-```cmd
-dir /a
-type secret.txt
-```
-
+![Task4](../../public/assets/blog/Task4.png)
 We located the concealed text file and displayed its contents to reveal the message.
 
 **🚩 Flag Captured!**
