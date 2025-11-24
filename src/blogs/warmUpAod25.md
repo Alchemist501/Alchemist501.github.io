@@ -19,7 +19,7 @@ Here is my write-up for challenges 1 through 10.
 
 > **Scenario:** McSkidy is trying to secure his accounts before the holiday rush, but the system is rejecting his weak password attempts. To proceed with his preparations at TBFC (*The Best Festival Company*), he must create a strong password.
 
-![McSkidy](../../public/assets/blog/Task1.jpg)
+![McSkidy](assets/blog/Task1.jpg)
 
 **Objective:** Help McSkidy craft a secure password that the system will accept.
 
@@ -75,7 +75,7 @@ The behavior looked suspicious, and after analyzing it fully, we confirmed its m
     * *cd challenges* 
     * *ls -la*
     * *cat .welcome_msg*
-![Task3](../../public/assets/blog/Task3.png)
+![Task3](assets/blog/Task3.png)
 After viewing the hidden message using standard Linux commands, we found the flag.
 
 **🚩 Flag Captured!**
@@ -100,7 +100,7 @@ After viewing the hidden message using standard Linux commands, we found the fla
     * *dir /a*
     * *type hidden_flag.txt*
 
-![Task4](../../public/assets/blog/Task4.png)
+![Task4](assets/blog/Task4.png)
 We located the concealed text file and displayed its contents to reveal the message.
 
 **🚩 Flag Captured!**
