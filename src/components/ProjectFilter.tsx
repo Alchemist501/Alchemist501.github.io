@@ -22,6 +22,15 @@ interface Project {
 
 const projects: Project[] = [
   {
+    title: "IAM POLICY SECURITY ANALYZER",
+    description: "Automated tool that detects 8 categories of AWS IAM misconfigurations including privilege escalation paths, cross-account access risks, and public S3 bucket exposure. Generates interactive HTML dashboards with security scores.",
+    tech: ["Python", "Boto3", "Jinja2", "AWS IAM", "Pytest"],
+    category: "security",
+    github: "https://github.com/Alchemist501/IAM-Policy-Security-Analyser",
+    demo: "/assets/Projects/IAMAnalyser.gif",
+    image: "/assets/Projects/IAMAnalyser.gif"
+  },
+  {
     title: "THE MARAUDER'S MAP",
     description: "Network Reconnaissance and Anomaly Detector - Python-based security application for proactive defense and monitoring with packet sniffing using Scapy, SQLite storage, and Flask web interface.",
     tech: ["Python", "Scapy", "Flask", "SQLite"],
@@ -85,7 +94,7 @@ const projects: Project[] = [
     category: "other",
     link: "https://www.linkedin.com/posts/alchemist501_n8n-googlegemini-ai-activity-7382131709493796865-dmqv?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
     image: "/assets/Projects/Deadline.jpg"
-  },
+  }
 ];
 
 export const ProjectFilter = ({ theme = "dark", onInteraction, layout = "grid" }: { theme?: "dark" | "light", onInteraction?: () => void, layout?: "grid" | "carousel" }) => {

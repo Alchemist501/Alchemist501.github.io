@@ -577,6 +577,8 @@ export const LightPortfolio = () => {
             {[
               { name: "Google Cybersecurity", org: "" },
               { name: "Ethical Hacking", org: "NPTEL" },
+              { name: "Practical Cybersecurity for Cybersecurity practitioners", org: "NPTEL" },
+              { name: "Privacy and Security in Online Social Media", org: "NPTEL" },
               { name: "Cybersecurity Fundamentals", org: "IBM SkillsBuild" },
             ].map((cert, i) => (
               <motion.div
