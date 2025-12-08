@@ -5,6 +5,7 @@ excerpt: "A comprehensive walkthrough of the first 10 warm-up challenges from Tr
 coverImage: "/assets/blog/AoD25.jpg"
 headerImage: "/assets/blog/AoCHeader.jpg"
 tags: ["CTF", "Cybersecurity", "TryHackMe", "Walkthrough"]
+series: "Advent of Cyber 2025"
 ---
 
 

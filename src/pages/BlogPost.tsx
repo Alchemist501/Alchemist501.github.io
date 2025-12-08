@@ -83,7 +83,7 @@ const BlogPost = () => {
 
                     <div className={`prose prose-lg max-w-none ${theme === 'dark'
                         ? 'prose-invert prose-headings:text-primary prose-a:text-accent prose-strong:text-primary prose-code:text-accent'
-                        : 'prose-headings:text-gray-900 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:text-gray-800'
+                        : 'prose-headings:text-gray-900 prose-a:text-blue-600 prose-strong:text-gray-900 prose-code:text-gray-800 prose-pre:bg-gray-100 prose-pre:text-gray-900'
                         }`}>
                         <ReactMarkdown remarkPlugins={[remarkGfm]}>{blog.content}</ReactMarkdown>
                     </div>

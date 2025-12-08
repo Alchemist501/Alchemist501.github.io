@@ -5,6 +5,7 @@ excerpt: "The unthinkable has happened - McSkidy has been kidnapped. Join me as 
 coverImage: "/assets/blog/Day1CoverImage.jpg"
 headerImage: "/assets/blog/Task1Header.jpg"
 tags: ["CTF", "Cybersecurity", "TryHackMe", "Linux", "Walkthrough"]
+series: "Advent of Cyber 2025"
 ---
 
 # Introduction: The Story

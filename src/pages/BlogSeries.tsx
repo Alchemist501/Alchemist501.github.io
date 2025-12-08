@@ -1,54 +1,40 @@
 import { useEffect, useState } from "react";
 import { motion } from "framer-motion";
 import { getBlogs, BlogPost } from "@/lib/blog";
-import { Link, useLocation } from "react-router-dom";
-import { Calendar, Clock, ChevronRight } from "lucide-react";
-
+import { Link, useLocation, useParams } from "react-router-dom";
+import { Calendar, ChevronRight, ArrowLeft } from "lucide-react";
 import { useTheme } from "@/contexts/ThemeContext";
-import { ArrowLeft } from "lucide-react";
 import { ThemeToggle } from "@/components/ThemeToggle";
 
-const Blog = () => {
+const BlogSeries = () => {
     const { theme } = useTheme();
+    const { series } = useParams<{ series: string }>();
     const [blogs, setBlogs] = useState<BlogPost[]>([]);
-    const [seriesList, setSeriesList] = useState<{ name: string; count: number; coverImage?: string }[]>([]);
     const location = useLocation();
     const isProfessional = location.pathname.startsWith("/professional");
 
+    // Helper to decode URL-friendly series name back to original
+    const decodeSeriesName = (slug: string) => {
+        return decodeURIComponent(slug);
+    };
+
     useEffect(() => {
         const fetchBlogs = async () => {
-            const fetchedBlogs = await getBlogs();
-            setBlogs(fetchedBlogs);
-
-            // Extract unique series
-            const seriesMap = new Map<string, { count: number; coverImage?: string }>();
-            fetchedBlogs.forEach(blog => {
-                if (blog.series) {
-                    const current = seriesMap.get(blog.series) || { count: 0, coverImage: blog.coverImage };
-                    seriesMap.set(blog.series, {
-                        count: current.count + 1,
-                        coverImage: current.coverImage // Keep the first found image (latest post)
-                    });
-                }
-            });
-
-            const seriesArray = Array.from(seriesMap.entries()).map(([name, data]) => ({
-                name,
-                count: data.count,
-                coverImage: data.coverImage
-            }));
-            setSeriesList(seriesArray);
+            const allBlogs = await getBlogs();
+            const seriesName = decodeSeriesName(series || "");
+            const filteredBlogs = allBlogs.filter(blog => blog.series === seriesName);
+            setBlogs(filteredBlogs);
         };
         fetchBlogs();
-    }, []);
+    }, [series]);
 
     return (
         <div className={`min-h-screen py-20 px-4 md:px-8 ${theme === 'dark' ? 'bg-background text-foreground font-mono' : 'bg-gray-50 text-gray-900 font-sans'}`}>
-            <div className="max-w-6xl mx-auto">
+            <div className="max-w-4xl mx-auto">
                 <div className="flex justify-between items-center mb-8">
-                    <Link to={isProfessional ? "/professional" : "/"} className={`inline-flex items-center transition-colors ${theme === 'dark' ? 'text-primary hover:text-accent' : 'text-gray-600 hover:text-gray-900'}`}>
+                    <Link to={isProfessional ? "/professional/blog" : "/blog"} className={`inline-flex items-center transition-colors ${theme === 'dark' ? 'text-primary hover:text-accent' : 'text-gray-600 hover:text-gray-900'}`}>
                         <ArrowLeft className="w-4 h-4 mr-2" />
-                        Back to Profile
+                        Back to Series
                     </Link>
                     <ThemeToggle />
                 </div>
@@ -56,57 +42,14 @@ const Blog = () => {
                 <motion.h1
                     initial={{ opacity: 0, y: -20 }}
                     animate={{ opacity: 1, y: 0 }}
-                    className={`text-4xl md:text-5xl font-bold mb-12 text-center ${theme === 'dark' ? 'glow-green' : 'text-gray-900'}`}
+                    className={`text-3xl md:text-4xl font-bold mb-12 text-center ${theme === 'dark' ? 'glow-green' : 'text-gray-900'}`}
                 >
-                    {theme === 'dark' ? "< Blog />" : "Blog"}
+                    {decodeSeriesName(series || "")}
                 </motion.h1>
 
-                {/* Series Section */}
-                {seriesList.length > 0 && (
-                    <div className="mb-16">
-                        <h2 className={`text-2xl font-bold mb-6 ${theme === 'dark' ? 'text-primary' : 'text-gray-900'}`}>Series</h2>
-                        <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
-                            {seriesList.map((series, index) => (
-                                <motion.div
-                                    key={series.name}
-                                    initial={{ opacity: 0, y: 20 }}
-                                    animate={{ opacity: 1, y: 0 }}
-                                    transition={{ delay: index * 0.1 }}
-                                    className={`${theme === 'dark'
-                                        ? 'bg-card border border-primary/30 hover:border-primary'
-                                        : 'bg-white border border-gray-200 shadow-sm hover:shadow-md'
-                                        } rounded-lg overflow-hidden transition-all group cursor-pointer`}
-                                >
-                                    <Link to={isProfessional ? `/professional/blog/series/${encodeURIComponent(series.name)}` : `/blog/series/${encodeURIComponent(series.name)}`} className="block h-full">
-                                        {series.coverImage && (
-                                            <div className="h-48 overflow-hidden bg-muted">
-                                                <img
-                                                    src={series.coverImage}
-                                                    alt={series.name}
-                                                    className="w-full h-full object-cover transition-transform group-hover:scale-105"
-                                                />
-                                            </div>
-                                        )}
-                                        <div className="p-6">
-                                            <h3 className={`text-xl font-bold mb-2 ${theme === 'dark' ? 'text-primary group-hover:text-accent' : 'text-gray-900 group-hover:text-blue-600'}`}>
-                                                {series.name}
-                                            </h3>
-                                            <p className="text-muted-foreground text-sm">
-                                                {series.count} Articles
-                                            </p>
-                                        </div>
-                                    </Link>
-                                </motion.div>
-                            ))}
-                        </div>
-                    </div>
-                )}
-
-                {/* Recent Posts Section */}
-                <div>
-                    <h2 className={`text-2xl font-bold mb-6 ${theme === 'dark' ? 'text-primary' : 'text-gray-900'}`}>Recent Posts</h2>
-                    <div className="grid gap-8">
-                        {blogs.map((blog, index) => (
+                <div className="grid gap-8">
+                    {blogs.length > 0 ? (
+                        blogs.map((blog, index) => (
                             <motion.div
                                 key={blog.slug}
                                 initial={{ opacity: 0, y: 20 }}
@@ -134,11 +77,6 @@ const Blog = () => {
                                                     <Calendar className="w-4 h-4" />
                                                     {new Date(blog.date).toLocaleDateString()}
                                                 </span>
-                                                {blog.series && (
-                                                    <span className={`px-2 py-0.5 text-xs rounded-full border ${theme === 'dark' ? 'border-accent text-accent' : 'border-blue-200 text-blue-700 bg-blue-50'}`}>
-                                                        {blog.series}
-                                                    </span>
-                                                )}
                                             </div>
                                             <h2 className={`text-2xl font-bold mb-3 transition-colors ${theme === 'dark' ? 'text-primary group-hover:text-accent' : 'text-gray-900 group-hover:text-gray-600'
                                                 }`}>
@@ -168,12 +106,16 @@ const Blog = () => {
                                     </div>
                                 </Link>
                             </motion.div>
-                        ))}
-                    </div>
+                        ))
+                    ) : (
+                        <div className="text-center py-12 text-muted-foreground">
+                            No posts found in this series.
+                        </div>
+                    )}
                 </div>
             </div>
         </div>
     );
 };
 
-export default Blog;
+export default BlogSeries;

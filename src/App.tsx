@@ -7,6 +7,7 @@ import { ThemeProvider } from "@/contexts/ThemeContext";
 import { ThemeRoute } from "@/components/ThemeRoute";
 import Index from "./pages/Index";
 import Blog from "./pages/Blog";
+import BlogSeries from "./pages/BlogSeries";
 import BlogPost from "./pages/BlogPost";
 import NotFound from "./pages/NotFound";
 
@@ -22,11 +23,13 @@ const App = () => (
           <Routes>
             <Route path="/" element={<Index />} />
             <Route path="/blog" element={<Blog />} />
+            <Route path="/blog/series/:series" element={<BlogSeries />} />
             <Route path="/blog/:slug" element={<BlogPost />} />
 
             {/* Professional / Dark Mode Routes */}
             <Route path="/professional" element={<ThemeRoute theme="dark"><Index /></ThemeRoute>} />
             <Route path="/professional/blog" element={<ThemeRoute theme="dark"><Blog /></ThemeRoute>} />
+            <Route path="/professional/blog/series/:series" element={<ThemeRoute theme="dark"><BlogSeries /></ThemeRoute>} />
             <Route path="/professional/blog/:slug" element={<ThemeRoute theme="dark"><BlogPost /></ThemeRoute>} />
 
             {/* ADD ALL CUSTOM ROUTES ABOVE THE CATCH-ALL "*" ROUTE */}

@@ -15,6 +15,7 @@ export interface BlogPost {
   coverImage?: string;
   headerImage?: string;
   tags?: string[];
+  series?: string;
 }
 
 export const getBlogs = async (): Promise<BlogPost[]> => {
@@ -35,6 +36,7 @@ export const getBlogs = async (): Promise<BlogPost[]> => {
       coverImage: data.coverImage,
       headerImage: data.headerImage,
       tags: data.tags || [],
+      series: data.series,
     });
   }
 
