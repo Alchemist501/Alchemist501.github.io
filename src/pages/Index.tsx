@@ -1,17 +1,18 @@
-import { useState, useCallback, useEffect } from "react";
+import { useState, useCallback, useEffect, useMemo } from "react";
 import { motion, useScroll, useTransform } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
+import { useRole } from "@/contexts/RoleContext";
+import { SPECIALIZATIONS } from "@/lib/config";
 import { LightPortfolio } from "@/components/LightPortfolio";
 import { ThemeToggle } from "@/components/ThemeToggle";
-import { NetworkGraph } from "@/components/NetworkGraph";
 import { TypewriterText } from "@/components/TypewriterText";
 import { NameTypewriter } from "@/components/NameTypewriter";
 import { ResumeDialog } from "@/components/ResumeDialog";
 import { ProjectFilter } from "@/components/ProjectFilter";
-import { Mail, Linkedin, Github, Shield, Code2, User, BookOpen, Trophy } from "lucide-react";
+import { Mail, Linkedin, Github, Shield, Code2, User, BookOpen, Trophy, Cpu, Brain, Award } from "lucide-react";
 import { Terminal } from "@/components/Terminal";
 import { Bitmoji } from "@/components/Bitmoji";
-import { Link, useLocation } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 
 const Index = () => {
   const { theme } = useTheme();
@@ -31,12 +32,10 @@ const Index = () => {
   return (
     <>
       {/* Light Mode */}
-      <div style={{ display: theme === "light" ? "block" : "none" }}>
-        <LightPortfolio />
-      </div>
+      {theme === "light" && <LightPortfolio />}
 
       {/* Dark Mode */}
-      <div style={{ display: theme === "dark" ? "block" : "none" }}>
+      {theme === "dark" && (
         <DarkModeContent
           activeSection={activeSection}
           setActiveSection={setActiveSection}
@@ -52,7 +51,7 @@ const Index = () => {
           heroY={heroY}
           heroOpacity={heroOpacity}
         />
-      </div>
+      )}
     </>
   );
 };
@@ -89,21 +88,204 @@ const DarkModeContent = ({
 }) => {
   const { theme } = useTheme();
   const location = useLocation();
+  const { role } = useRole();
+  const navigate = useNavigate();
+
+  const getAboutIcon = (index: number, role: string) => {
+    if (role === "systems") {
+      return [Cpu, Code2, BookOpen][index] || Cpu;
+    } else if (role === "cybersecurity") {
+      return [Shield, Code2, BookOpen][index] || Shield;
+    } else {
+      return [Brain, Shield, Cpu][index] || Brain;
+    }
+  };
+
+  const orderedSkills = useMemo(() => {
+    if (role === "systems") {
+      return [
+        {
+          id: "core",
+          category: "Core Systems",
+          icon: <Cpu className="w-8 h-8" />,
+          skills: ["Memory Management", "Concurrency", "Lock-free Programming", "Kernel Space", "Low-Latency Data Structures"],
+          color: "text-[hsl(200,100%,50%)]",
+          borderColor: "border-[hsl(200,100%,50%)]",
+          bgColor: "bg-[hsl(200,100%,50%)]/20",
+          glow: "glow-blue"
+        },
+        {
+          id: "languages",
+          category: "Languages",
+          icon: <Code2 className="w-8 h-8" />,
+          skills: ["C++", "Rust", "Go", "C", "Bash"],
+          color: "text-[hsl(280,100%,60%)]",
+          borderColor: "border-[hsl(280,100%,60%)]",
+          bgColor: "bg-[hsl(280,100%,60%)]/20",
+          glow: "glow-purple"
+        },
+        {
+          id: "platforms",
+          category: "Platforms & Tools",
+          icon: <BookOpen className="w-8 h-8" />,
+          skills: ["Linux", "UNIX/POSIX", "Git", "Docker", "eBPF"],
+          color: "text-[hsl(180,100%,50%)]",
+          borderColor: "border-[hsl(180,100%,50%)]",
+          bgColor: "bg-[hsl(180,100%,50%)]/20",
+          glow: "glow-cyan"
+        },
+        {
+          id: "other",
+          category: "Interests & Infra",
+          icon: <Shield className="w-8 h-8" />,
+          skills: ["Network Programming", "Performance Auditing", "Distributed Systems"],
+          color: "text-[hsl(330,100%,60%)]",
+          borderColor: "border-[hsl(330,100%,60%)]",
+          bgColor: "bg-[hsl(330,100%,60%)]/20",
+          glow: "glow-pink"
+        }
+      ];
+    } else if (role === "cybersecurity") {
+      return [
+        {
+          id: "core",
+          category: "Security Operations",
+          icon: <Shield className="w-8 h-8" />,
+          skills: ["SIEM (Splunk)", "Threat Detection", "Incident Response", "Vulnerability Analysis"],
+          color: "text-[hsl(0,100%,50%)]",
+          borderColor: "border-[hsl(0,100%,50%)]",
+          bgColor: "bg-[hsl(0,100%,50%)]/20",
+          glow: "glow-red"
+        },
+        {
+          id: "testing",
+          category: "Offensive Security",
+          icon: <Code2 className="w-8 h-8" />,
+          skills: ["Penetration Testing", "OWASP Top 10", "Burp Suite", "Nmap", "Metasploit"],
+          color: "text-[hsl(330,100%,60%)]",
+          borderColor: "border-[hsl(330,100%,60%)]",
+          bgColor: "bg-[hsl(330,100%,60%)]/20",
+          glow: "glow-pink"
+        },
+        {
+          id: "tools",
+          category: "Tools & Scripting",
+          icon: <Cpu className="w-8 h-8" />,
+          skills: ["Scapy", "GoPhish", "YARA", "AWS IAM Security", "Python"],
+          color: "text-[hsl(180,100%,50%)]",
+          borderColor: "border-[hsl(180,100%,50%)]",
+          bgColor: "bg-[hsl(180,100%,50%)]/20",
+          glow: "glow-cyan"
+        },
+        {
+          id: "infra",
+          category: "Network Defense",
+          icon: <BookOpen className="w-8 h-8" />,
+          skills: ["Wireshark", "IDS/IPS Auditing", "eBPF Syscall Auditing", "Linux Security"],
+          color: "text-[hsl(280,100%,60%)]",
+          borderColor: "border-[hsl(280,100%,60%)]",
+          bgColor: "bg-[hsl(280,100%,60%)]/20",
+          glow: "glow-purple"
+        }
+      ];
+    } else {
+      return [
+        {
+          id: "core",
+          category: "Deep Learning",
+          icon: <Brain className="w-8 h-8" />,
+          skills: ["TensorFlow", "PyTorch", "Transformers", "Model Optimization", "CUDA"],
+          color: "text-[hsl(280,100%,60%)]",
+          borderColor: "border-[hsl(280,100%,60%)]",
+          bgColor: "bg-[hsl(280,100%,60%)]/20",
+          glow: "glow-purple"
+        },
+        {
+          id: "distributed",
+          category: "Distributed ML",
+          icon: <Cpu className="w-8 h-8" />,
+          skills: ["Federated Learning (Flower)", "Differential Privacy", "Secure Aggregation", "PySyft"],
+          color: "text-[hsl(200,100%,50%)]",
+          borderColor: "border-[hsl(200,100%,50%)]",
+          bgColor: "bg-[hsl(200,100%,50%)]/20",
+          glow: "glow-blue"
+        },
+        {
+          id: "vision",
+          category: "Computer Vision",
+          icon: <Code2 className="w-8 h-8" />,
+          skills: ["OpenCV", "ResNet (CNN)", "Image Processing", "Feature Extraction"],
+          color: "text-[hsl(180,100%,50%)]",
+          borderColor: "border-[hsl(180,100%,50%)]",
+          bgColor: "bg-[hsl(180,100%,50%)]/20",
+          glow: "glow-cyan"
+        },
+        {
+          id: "dev",
+          category: "Backend & Systems",
+          icon: <BookOpen className="w-8 h-8" />,
+          skills: ["Python", "Flask", "C++ Engine Integrations", "Linux Execution", "REST APIs"],
+          color: "text-[hsl(330,100%,60%)]",
+          borderColor: "border-[hsl(330,100%,60%)]",
+          bgColor: "bg-[hsl(330,100%,60%)]/20",
+          glow: "glow-pink"
+        }
+      ];
+    }
+  }, [role]);
+
+  const orderedInterests = useMemo(() => {
+    const allInterests = [
+      { name: "Low-Latency Systems", rolePriority: { systems: 1, cybersecurity: 5, ai: 4 } },
+      { name: "Distributed Infrastructure", rolePriority: { systems: 2, cybersecurity: 6, ai: 3 } },
+      { name: "Backend Engineering", rolePriority: { systems: 3, cybersecurity: 7, ai: 5 } },
+      { name: "Computer Architecture", rolePriority: { systems: 4, cybersecurity: 8, ai: 6 } },
+      { name: "Cybersecurity", rolePriority: { systems: 7, cybersecurity: 1, ai: 8 } },
+      { name: "Penetration Testing", rolePriority: { systems: 8, cybersecurity: 2, ai: 9 } },
+      { name: "Threat Detection", rolePriority: { systems: 6, cybersecurity: 3, ai: 7 } },
+      { name: "Security Automation", rolePriority: { systems: 5, cybersecurity: 4, ai: 10 } },
+      { name: "Distributed Learning", rolePriority: { systems: 9, cybersecurity: 10, ai: 1 } },
+      { name: "AI in Security", rolePriority: { systems: 10, cybersecurity: 9, ai: 2 } },
+    ];
+
+    return [...allInterests]
+      .sort((a, b) => a.rolePriority[role] - b.rolePriority[role])
+      .map(item => item.name);
+  }, [role]);
 
   // Initialize active section from hash or default to network
   useEffect(() => {
     if (theme === 'dark') {
-      const hash = location.hash.replace('#', '');
+      // Extract hash path without query params
+      const hash = location.hash.replace('#', '').split('?')[0];
       if (hash && ["network", "about", "projects", "skills", "achievements", "experience", "contact"].includes(hash)) {
         setActiveSection(hash as any);
       }
     }
   }, [theme, location.hash]);
 
-  // Update hash when active section changes
+  // Update hash when active section changes, preserving the role query parameter
   useEffect(() => {
     if (theme === 'dark') {
-      window.history.replaceState(null, '', `#${activeSection}`);
+      const searchParams = new URLSearchParams(window.location.search);
+      const roleParam = searchParams.get("role") || searchParams.get("focus");
+      
+      let queryStr = "";
+      if (roleParam) {
+        queryStr = `?role=${roleParam}`;
+      } else {
+        const hash = window.location.hash;
+        const hashQueryIndex = hash.indexOf("?");
+        if (hashQueryIndex !== -1) {
+          const hashParams = new URLSearchParams(hash.substring(hashQueryIndex));
+          const roleHash = hashParams.get("role") || hashParams.get("focus");
+          if (roleHash) {
+            queryStr = `?role=${roleHash}`;
+          }
+        }
+      }
+      
+      window.history.replaceState(null, '', `#${activeSection}${queryStr}`);
       window.scrollTo(0, 0);
     }
   }, [activeSection, theme]);
@@ -178,10 +360,21 @@ const DarkModeContent = ({
   return (
     <div key="dark-theme" className={`min-h-screen font-mono overflow-hidden ${theme === 'dark' ? 'bg-black text-green-500 dark' : 'bg-background text-foreground'}`} onClick={handleBackgroundClick}>
       {/* Minimal Fixed Header - ResumeDialog on Left & Theme Toggle on Right */}
-      <header className="fixed top-0 left-0 right-0 z-[100] p-6">
-        <div className="flex justify-between items-center">
-          <ResumeDialog variant="cyber" />
-          <div className="flex items-center gap-4">
+      <header className="fixed top-0 left-0 right-0 z-[100] p-4 glass-header">
+        <div className="flex flex-col sm:flex-row gap-4 justify-between items-center w-full max-w-7xl mx-auto">
+          <div className="flex justify-between items-center w-full sm:w-auto gap-4">
+            <ResumeDialog variant="cyber" />
+            <div className="sm:hidden flex items-center gap-3">
+              <Link to={isProfessional ? "/professional/blog" : "/blog"} className="text-primary hover:text-accent transition-colors" title="Blog">
+                <BookOpen className="w-5 h-5" />
+              </Link>
+              <ThemeToggle />
+            </div>
+          </div>
+          
+
+
+          <div className="hidden sm:flex items-center gap-4">
             <Link to={isProfessional ? "/professional/blog" : "/blog"} className="text-primary hover:text-accent transition-colors" title="Blog">
               <BookOpen className="w-6 h-6" />
             </Link>
@@ -207,27 +400,34 @@ const DarkModeContent = ({
                 className="text-center md:text-left md:ml-0"
               >
                 <div className="mb-5 lg:mr-40">
-                  <div className="font-mono text-3xl sm:text-4xl md:text-6xl font-bold mt-2 lg:mt-20">
-                    <div className="glow-green">Hey!</div>
-                    <div className="glow-green mt-2">I am SIYA P P</div>
+                  <div className="font-sans text-4xl sm:text-5xl md:text-7xl font-extrabold mt-2 lg:mt-20 tracking-tight leading-none">
+                    <div className="text-white">Hey!</div>
+                    <div className="bg-gradient-to-r from-primary via-[hsl(var(--accent))] to-primary bg-clip-text text-transparent mt-2 py-1 select-none filter drop-shadow-[0_0_15px_hsl(var(--primary)/0.2)]">
+                      I am SIYA P P
+                    </div>
+                  </div>
+                  <div className="font-mono text-xs sm:text-sm text-accent uppercase tracking-widest mt-4 mb-2 opacity-80">
+                    {SPECIALIZATIONS[role].subtitle}
                   </div>
                 </div>
                 <TypewriterText
-                  texts={[
-                    "Cyber Security Researcher",
-                    "Bug Bounty Hunter",
-                    "IoT Enthusiast",
-                    "Student",
-                    "Homo Sapien",
-                  ]}
+                  key={role}
+                  texts={SPECIALIZATIONS[role].typewriterTexts}
                   typingSpeed={80}
                   deletingSpeed={50}
                   pauseDuration={2000}
                 />
+                <motion.div
+                  initial={{ opacity: 0 }}
+                  animate={{ opacity: 1 }}
+                  key={`hero-desc-${role}`}
+                  className="mt-6 text-sm md:text-base text-primary/80 max-w-xl font-mono leading-relaxed"
+                >
+                  {SPECIALIZATIONS[role].description}
+                </motion.div>
               </motion.div>
               <Bitmoji />
             </motion.div>
-            <NetworkGraph />
           </section>
         )}
 
@@ -259,49 +459,30 @@ const DarkModeContent = ({
                 </p>
 
                 <div className="grid md:grid-cols-3 gap-6 mt-8">
-                  <div className="bg-card border border-primary/30 p-6 rounded-lg content-card">
-                    <Shield className="w-12 h-12 text-primary mb-4" />
-                    <h3 className="text-xl font-bold mb-3 text-primary">Offensive Security</h3>
-                    <p className="text-sm">
-                      Currently engaged in <strong>Bug Bounty Hunting</strong> on live assets (Meta, Zomato),
-                      performing continuous reconnaissance and vulnerability assessments. Practical experience in
-                      <strong> penetration testing and ethical hacking</strong>.
-                    </p>
-                  </div>
-
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCardClick('about-secure');
-                    }}
-                    className={`bg-card border border-primary/30 p-6 rounded-lg cursor-pointer content-card ${focusedElement === 'about-secure' ? 'z-50 scale-105 shadow-[0_0_40px_rgba(0,255,65,0.5)]' : 'z-10'
-                      }`}
-                  >
-                    <Code2 className="w-12 h-12 text-accent mb-4" />
-                    <h3 className="text-xl font-bold mb-3 text-accent">Secure Systems & Research</h3>
-                    <p className="text-sm">
-                      Major ongoing project: <strong>FL-DP FRAMEWORK</strong>, focusing on cutting-edge AI in security
-                      by integrating Federated Learning and Differential Privacy. Also developed
-                      <strong> THE MARAUDER'S MAP</strong> for network anomaly detection.
-                    </p>
-                  </div>
-
-                  <div
-                    onClick={(e) => {
-                      e.stopPropagation();
-                      handleCardClick('about-operations');
-                    }}
-                    className={`bg-card border border-primary/30 p-6 rounded-lg cursor-pointer content-card ${focusedElement === 'about-operations' ? 'z-50 scale-105 shadow-[0_0_40px_rgba(0,255,65,0.5)]' : 'z-10'
-                      }`}
-                  >
-                    <BookOpen className="w-12 h-12 text-primary mb-4" />
-                    <h3 className="text-xl font-bold mb-3 text-primary">Security Operations</h3>
-                    <p className="text-sm">
-                      Completed simulated <strong>SOC Analyst workflows</strong> on <strong>LETSDEFEND.IO</strong>,
-                      handling cases like malware side-loading and RCE exploitation. Active on platforms like
-                      <strong> TryHackMe, Hack the Box, and PortSwigger Labs</strong>.
-                    </p>
-                  </div>
+                  {SPECIALIZATIONS[role].aboutCards.map((card, index) => {
+                    const IconComponent = getAboutIcon(index, role);
+                    const cardId = `about-card-${index}`;
+                    return (
+                      <div
+                        key={index}
+                        onClick={(e) => {
+                          e.stopPropagation();
+                          handleCardClick(cardId);
+                        }}
+                        className={`bg-card border border-primary/30 p-6 rounded-lg cursor-pointer content-card transition-all ${
+                          focusedElement === cardId 
+                            ? 'z-50 scale-105 shadow-[0_0_40px_hsl(var(--primary)/0.5)] border-primary' 
+                            : 'z-10'
+                        }`}
+                      >
+                        <IconComponent className="w-12 h-12 text-primary mb-4" />
+                        <h3 className="text-xl font-bold mb-3 text-primary">{card.title}</h3>
+                        <p className="text-sm">
+                          {card.desc}
+                        </p>
+                      </div>
+                    );
+                  })}
                 </div>
               </motion.div>
             </div>
@@ -325,6 +506,87 @@ const DarkModeContent = ({
           </section>
         )}
 
+        {/* Research Section */}
+        {activeSection === "research" && (
+          <section id="research" className="min-h-screen py-20 px-4 md:px-8 bg-card/30 flex items-center">
+            <div className="max-w-4xl mx-auto w-full">
+              <motion.h2
+                initial={{ opacity: 0 }}
+                whileInView={{ opacity: 1 }}
+                viewport={{ once: true }}
+                className="text-4xl font-bold mb-12 text-center text-[hsl(150,100%,50%)] glow-green font-mono"
+              >
+                {"<"} Research {"/>"}
+              </motion.h2>
+              
+              <div className="space-y-6">
+                {/* FEDDP Research Project Card */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCardClick('research-feddp');
+                  }}
+                  className={`bg-card border border-primary/30 rounded-lg p-6 hover:border-primary transition-all cursor-pointer content-card ${focusedElement === 'research-feddp' ? 'z-50 scale-105 shadow-[0_0_40px_rgba(0,255,65,0.5)]' : 'z-10'
+                    }`}
+                >
+                  <div className="flex flex-col md:flex-row md:items-center md:justify-between mb-4">
+                    <div>
+                      <h3 className="text-xl font-bold text-primary font-mono">FEDDP: Federated Learning with Differential Privacy</h3>
+                      <p className="text-accent font-mono mt-1">Collaborative Research Framework</p>
+                    </div>
+                  </div>
+                  <div className="space-y-4 text-sm md:text-base">
+                    <p className="text-muted-foreground leading-relaxed">
+                      Investigating and developing a privacy-preserving secure collaborative learning framework. The research combines 
+                      <strong> Federated Learning (FL)</strong> and <strong>Differential Privacy (DP)</strong> using TensorFlow, Flower, and PySyft.
+                    </p>
+                    <p className="text-muted-foreground leading-relaxed">
+                      By adding calibrated noise to client models during training rounds, the framework successfully prevents membership inference 
+                      and reconstruction attacks, preserving privacy while training highly accurate distributed neural networks.
+                    </p>
+                    <div className="flex flex-wrap gap-2 mt-4">
+                      {["Federated Learning", "Differential Privacy", "Distributed ML", "Network Security", "TensorFlow", "Flower"].map((skill) => (
+                        <span key={skill} className="px-3 py-1 bg-primary/20 text-primary text-xs rounded-full border border-primary/50">
+                          {skill}
+                        </span>
+                      ))}
+                    </div>
+                  </div>
+                </motion.div>
+
+                {/* Additional Research Info / NPTEL certifications */}
+                <motion.div
+                  initial={{ opacity: 0, y: 20 }}
+                  whileInView={{ opacity: 1, y: 0 }}
+                  viewport={{ once: true }}
+                  transition={{ delay: 0.1 }}
+                  onClick={(e) => {
+                    e.stopPropagation();
+                    handleCardClick('research-academic');
+                  }}
+                  className={`bg-card border border-primary/30 rounded-lg p-6 hover:border-primary transition-all cursor-pointer content-card ${focusedElement === 'research-academic' ? 'z-50 scale-105 shadow-[0_0_40px_rgba(0,255,65,0.5)]' : 'z-10'}`}
+                >
+                  <h3 className="text-lg font-bold text-accent font-mono mb-4">Academic & Specialized Research Fields</h3>
+                  <ul className="space-y-3 list-disc list-inside text-sm md:text-base text-muted-foreground">
+                    <li>
+                      <strong className="text-primary">Privacy & Security in Online Social Media:</strong> Advanced NPTEL research coursework covering network analysis, information dissemination models, profiling attacks, and de-anonymization techniques.
+                    </li>
+                    <li>
+                      <strong className="text-primary">Performance-Aware AI Systems:</strong> Architecting resource-optimized computer vision pipelines (OpenCV, ResNet) for edge and IoT systems to trigger anomaly detections.
+                    </li>
+                    <li>
+                      <strong className="text-primary">Zero-Trust Cloud & Identity Infrastructure:</strong> Researching automated IAM privilege escalation detection methods and least-privilege security automation in AWS.
+                    </li>
+                  </ul>
+                </motion.div>
+              </div>
+            </div>
+          </section>
+        )}
+
         {/* Skills Section */}
         {activeSection === "skills" && (
           <section id="skills" className="min-h-screen py-20 px-4 md:px-8 bg-card/30 flex items-center">
@@ -338,46 +600,9 @@ const DarkModeContent = ({
                 Skills & Expertise
               </motion.h2>
               <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
-                {[
-                  {
-                    category: "Security",
-                    icon: <Shield className="w-8 h-8" />,
-                    skills: ["Penetration Testing", "Network Security", "Threat Intelligence", "SIEM"],
-                    color: "text-[hsl(330,100%,60%)]",
-                    borderColor: "border-[hsl(330,100%,60%)]",
-                    bgColor: "bg-[hsl(330,100%,60%)]/20",
-                    glow: "glow-pink"
-                  },
-                  {
-                    category: "Tools",
-                    icon: <Code2 className="w-8 h-8" />,
-                    skills: ["Burp Suite", "Wireshark", "Nmap", "Scapy", "GoPhish", "Git"],
-                    color: "text-[hsl(180,100%,50%)]",
-                    borderColor: "border-[hsl(180,100%,50%)]",
-                    bgColor: "bg-[hsl(180,100%,50%)]/20",
-                    glow: "glow-cyan"
-                  },
-                  {
-                    category: "Languages",
-                    icon: <Code2 className="w-8 h-8" />,
-                    skills: ["Python", "C++", "JavaScript", "Bash"],
-                    color: "text-[hsl(280,100%,60%)]",
-                    borderColor: "border-[hsl(280,100%,60%)]",
-                    bgColor: "bg-[hsl(280,100%,60%)]/20",
-                    glow: "glow-purple"
-                  },
-                  {
-                    category: "Platforms",
-                    icon: <BookOpen className="w-8 h-8" />,
-                    skills: ["Linux", "Windows", "Flask", "Node.js"],
-                    color: "text-[hsl(200,100%,50%)]",
-                    borderColor: "border-[hsl(200,100%,50%)]",
-                    bgColor: "bg-[hsl(200,100%,50%)]/20",
-                    glow: "glow-blue"
-                  },
-                ].map((group, i) => (
+                {orderedSkills.map((group, i) => (
                   <motion.div
-                    key={i}
+                    key={group.id}
                     initial={{ opacity: 0, y: 20 }}
                     whileInView={{ opacity: 1, y: 0 }}
                     viewport={{ once: true }}
@@ -414,7 +639,7 @@ const DarkModeContent = ({
               >
                 <h3 className="text-2xl font-bold mb-6 text-accent">Interests</h3>
                 <div className="flex flex-wrap gap-3">
-                  {["Cybersecurity", "Backend Development", "AI in Security", "Threat Detection", "Penetration Testing", "Bug Bounty Hunting", "Agentic AI", "IoT"].map((interest) => (
+                  {orderedInterests.map((interest) => (
                     <span
                       key={interest}
                       className="px-4 py-2 bg-accent/20 text-accent rounded-full border border-accent/50 font-semibold"
@@ -762,7 +987,7 @@ const DarkModeContent = ({
                 transition={{ delay: 0.2 }}
                 className="text-xl text-muted-foreground mb-12"
               >
-                Interested in working together or discussing cybersecurity? Reach out!
+                {SPECIALIZATIONS[role].contactTagline}
               </motion.p>
               <motion.div
                 initial={{ opacity: 0, y: 20 }}
@@ -798,6 +1023,13 @@ const DarkModeContent = ({
           </section>
         )}
       </main>
+
+      {/* Footer */}
+      <footer className="py-8 px-4 md:px-8 border-t border-primary/20 text-center text-xs text-muted-foreground font-mono bg-black/20 backdrop-blur-sm">
+        <div className="max-w-7xl mx-auto flex flex-col sm:flex-row items-center justify-between gap-4">
+          <p>© 2025 SIYA P P. All rights reserved.</p>
+        </div>
+      </footer>
 
       {/* Terminal */}
       <Terminal

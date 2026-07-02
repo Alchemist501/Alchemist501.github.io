@@ -61,7 +61,7 @@ export const Bitmoji = () => {
       >
         {/* Front Side - Waving Hand with Matrix Rain */}
         <motion.div
-          className="absolute inset-0 rounded-2xl border-4 border-primary shadow-lg shadow-primary/50 overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20"
+          className="absolute inset-0 rounded-2xl border-4 border-primary shadow-lg shadow-primary/50 overflow-hidden bg-gradient-to-br from-primary/20 to-secondary/20 pulse-glow"
           style={{
             backfaceVisibility: "hidden",
             transformStyle: "preserve-3d",
@@ -87,7 +87,7 @@ export const Bitmoji = () => {
 
         {/* Back Side - Photo with Matrix Rain */}
         <motion.div
-          className="absolute inset-0 rounded-2xl border-4 border-primary shadow-lg shadow-primary/50 overflow-hidden"
+          className="absolute inset-0 rounded-2xl border-4 border-primary shadow-lg shadow-primary/50 overflow-hidden pulse-glow"
           style={{
             backfaceVisibility: "hidden",
             transform: "rotateY(180deg)",

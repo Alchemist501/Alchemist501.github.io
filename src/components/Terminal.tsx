@@ -13,7 +13,7 @@ interface TerminalProps {
 const fileSystem: Record<string, string[]> = {
   "~": ["about/", "projects/", "skills/", "achievements/", "experience/", "contact/", "blog/"],
   "~/about": ["offensive_security.txt", "secure_systems.txt", "security_operations.txt"],
-  "~/projects": ["marauders_map.txt", "letsdefend_soc.txt", "phishing_campaign.txt", "fl_dp_framework.txt", "subwhisper.txt", "aggrow.txt", "biosignals.txt", "deadline_extractor.txt"],
+  "~/projects": ["exchange_matching_engine.txt", "cache_simulator.txt", "order_book_simulator.txt", "marauders_map.txt", "iam_analyzer.txt", "cascade_guard.txt", "letsdefend_soc.txt", "phishing_campaign.txt", "fl_dp_framework.txt", "subwhisper.txt", "aggrow.txt", "biosignals.txt", "deadline_extractor.txt"],
   "~/skills": ["security/", "tools/", "languages/", "platforms/"],
   "~/skills/security": ["penetration_testing", "network_security", "threat_intelligence", "siem"],
   "~/skills/tools": ["burp_suite", "wireshark", "nmap", "scapy", "gophish", "git"],
@@ -63,7 +63,7 @@ export const Terminal = ({ onCommand, zIndex = 40, onFocus, onResize }: Terminal
       "  cd <path>    - Navigate to a directory (use '..' to go up)",
       "  pwd          - Print current directory",
       "  about        - Learn about me",
-      "  projects     - View cybersecurity projects",
+      "  projects     - View my projects",
       "  skills       - Explore technical skills",
       "  achievements - View my achievements",
       "  experience   - View my experience",
@@ -173,7 +173,8 @@ export const Terminal = ({ onCommand, zIndex = 40, onFocus, onResize }: Terminal
       onCommand(cmd);
     } else if (cmd === "blog") {
       setHistory((prev) => [...prev, "Navigating to blog..."]);
-      window.location.href = "/blog";
+      const isProf = window.location.hash.includes("/professional");
+      window.location.hash = isProf ? "/professional/blog" : "/blog";
     } else {
       setHistory((prev) => [...prev, `Command not found: ${cmd}`, "Type 'help' for available commands"]);
     }
