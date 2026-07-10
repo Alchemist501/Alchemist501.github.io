@@ -57,22 +57,7 @@ const projects: Project[] = [
     ],
     impact: "Demonstrated deep understanding of memory hierarchy trade-offs with a tool capable of benchmarking real workload patterns against configurable hardware parameters"
   },
-  {
-    title: "FedDP — Distributed Privacy-Preserving ML Infrastructure",
-    description: "A distributed computing system coordinating 100 clients across a Linux network for federated machine learning — built without cloud dependency, emphasizing infrastructure reliability and communication efficiency.",
-    tech: ["Python", "TensorFlow", "Ray", "TailScale", "Linux", "PowerShell"],
-    category: "systems",
-    link: "https://www.linkedin.com/posts/alchemist501_federatedlearning-differentialprivacy-tcs-activity-7388611816085610496-4fSQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
-    image: "/assets/Projects/FL-DP.png",
-    metrics: [
-      "Architected and configured a multi-node distributed computing environment across 100 clients on Linux using Ray for orchestration and TailScale for secure private networking",
-      "Engineered communication optimization layer using Top-K sparsification + 8-bit quantization, reducing data transfer 78% (3.0 GB → 0.65 GB) across the network",
-      "Built system to operate entirely on 8GB RAM with no GPU dependency — demonstrating resource-constrained infrastructure design",
-      "Validated end-to-end distributed system reliability under adversarial conditions (4 attack vectors including 50× gradient scaling and backdoor injection)",
-      "Co-authored IEEE-submitted research paper documenting system architecture, experimental methodology, and infrastructure design decisions"
-    ],
-    impact: "78% communication overhead reduction; system maintained 78% accuracy at ε=50 privacy budget while coordinating 100 distributed clients — research under IEEE review"
-  },
+
   {
     title: "Biosignals — Distributed Disaster Early Warning System",
     description: "A web-based ML system that ingests animal behavioral data from distributed sources and flags anomalies predictive of natural disasters — a full-stack distributed data pipeline.",
@@ -153,22 +138,7 @@ const projects: Project[] = [
     ],
     impact: "Completed realistic SOC analyst workflows across multiple attack categories — malware, phishing, and RCE — building practical defensive security muscle memory"
   },
-  {
-    title: "FedDP — Byzantine-Robust Federated Learning with Differential Privacy",
-    description: "A research system hardening distributed ML against adversarial attacks — combining cryptographic privacy guarantees with Byzantine fault tolerance.",
-    tech: ["Python", "TensorFlow", "Privacy", "Ray", "NumPy", "Linux"],
-    category: "security",
-    link: "https://www.linkedin.com/posts/alchemist501_federatedlearning-differentialprivacy-tcs-activity-7388611816085610496-4fSQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
-    image: "/assets/Projects/FL-DP.png",
-    metrics: [
-      "Implemented adaptive differential privacy with (ε,δ)-DP guarantees — enforcing privacy budgets while neutralizing magnitude-based gradient poisoning attacks",
-      "Deployed Geometric Median aggregation for Byzantine robustness, suppressing backdoor attack success from 63% to <2%",
-      "Tested against 4 adversarial attack vectors: Magnitude Scaling (50×), Sign Flipping, Label Flipping, Backdoor Trigger injection",
-      "Achieved 52 percentage point accuracy recovery under 50× gradient scaling attack",
-      "Co-authored IEEE-submitted paper documenting threat model, defense mechanisms, and experimental results"
-    ],
-    impact: "Backdoor suppression 63% → <2%; 52pp accuracy recovery under active attack; IEEE paper under review"
-  },
+
   {
     title: "Cascade-Guard — Propagation-Based Fake News Detection",
     description: "A Graph Attention Network classifier that detects fake news by analyzing how it spreads — not what it says — catching coordinated bot-driven disinformation campaigns that bypass NLP-only detectors.",
@@ -219,23 +189,7 @@ const projects: Project[] = [
     ],
     impact: "End-to-end AI agricultural assistant combining CV disease detection, ML crop recommendation, and geolocation — deployed with multilingual support for real farmer accessibility"
   },
-  {
-    title: "FedDP — Federated Learning with Differential Privacy",
-    description: "A research-grade distributed ML system that trains across 100 clients while enforcing cryptographic privacy guarantees and Byzantine attack resilience — co-authored for IEEE publication.",
-    tech: ["Python", "TensorFlow", "TensorFlow Privacy", "Ray", "NumPy", "Linux"],
-    category: "ai",
-    link: "https://www.linkedin.com/posts/alchemist501_federatedlearning-differentialprivacy-tcs-activity-7388611816085610496-4fSQ?utm_source=share&utm_medium=member_desktop&rcm=ACoAAD92xMABDJDA3tFyYEx9O5e6jxx1w1Uod6U",
-    image: "/assets/Projects/FL-DP.png",
-    metrics: [
-      "Designed unified federated learning framework with adaptive differential privacy clipping enforcing (ε,δ)-DP guarantees across all client updates",
-      "Implemented Geometric Median aggregation for Byzantine fault tolerance — suppressing backdoor attack success rate from 63% to <2%",
-      "Engineered Top-K sparsification + 8-bit quantization communication layer, reducing gradient transmission 78% (3.0 GB → 0.65 GB)",
-      "Benchmarked against 4 adversarial attack vectors: Magnitude Scaling (50×), Sign Flipping, Label Flipping, and Backdoor Trigger",
-      "Achieved 78% model accuracy at ε=50 privacy budget; 52pp accuracy recovery under active 50× scaling attack",
-      "Co-authored IEEE-submitted paper — full experimental methodology, ablation studies, and results"
-    ],
-    impact: "78% comms reduction, backdoor suppression to <2%, IEEE paper under review — production-ready privacy-preserving FL research"
-  },
+
   {
     title: "Biosignals — ML-Driven Disaster Prediction from Animal Behavior",
     description: "A web-based early warning system applying anomaly detection to animal behavioral data to predict natural disasters — translating bioacoustic and behavioral signals into actionable alerts.",

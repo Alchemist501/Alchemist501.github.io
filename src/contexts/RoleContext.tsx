@@ -21,23 +21,26 @@ export const RoleProvider = ({ children }: { children: ReactNode }) => {
     const windowPath = window.location.pathname.toLowerCase();
     const windowHash = window.location.hash.toLowerCase();
 
-    const matchesCyber = 
-      lowerPath.includes("cyber") || 
-      windowPath.includes("cyber") || 
-      windowHash.includes("cyber");
-
     const matchesAI = 
       lowerPath.includes("ai") || 
       windowPath.includes("ai") || 
       windowHash.includes("ai");
 
-    if (matchesCyber) {
-      return "cybersecurity";
-    }
+    const matchesInfra = 
+      lowerPath.includes("infra") || 
+      lowerPath.includes("systems") || 
+      windowPath.includes("infra") || 
+      windowPath.includes("systems") || 
+      windowHash.includes("infra") || 
+      windowHash.includes("systems");
+
     if (matchesAI) {
       return "ai";
     }
-    return "systems"; // default
+    if (matchesInfra) {
+      return "systems";
+    }
+    return "cybersecurity"; // default
   };
 
   // Sync role and class names with location pathname
@@ -55,11 +58,11 @@ export const RoleProvider = ({ children }: { children: ReactNode }) => {
     let targetPath = "/";
 
     if (newRole === "cybersecurity") {
-      targetPath = isProfessional ? "/professional/cyber" : "/cyber";
+      targetPath = isProfessional ? "/professional" : "/";
     } else if (newRole === "ai") {
       targetPath = isProfessional ? "/professional/ai" : "/ai";
     } else {
-      targetPath = isProfessional ? "/professional" : "/";
+      targetPath = isProfessional ? "/professional/infra" : "/infra";
     }
 
     navigate(targetPath);

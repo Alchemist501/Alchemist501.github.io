@@ -28,6 +28,7 @@ const App = () => (
               <Route path="/" element={<Index />} />
               <Route path="/cyber" element={<Index />} />
               <Route path="/ai" element={<Index />} />
+              <Route path="/infra" element={<Index />} />
               
               <Route path="/blog" element={<Blog />} />
               <Route path="/blog/series/:series" element={<BlogSeries />} />
@@ -37,6 +38,7 @@ const App = () => (
               <Route path="/professional" element={<ThemeRoute theme="dark"><Index /></ThemeRoute>} />
               <Route path="/professional/cyber" element={<ThemeRoute theme="dark"><Index /></ThemeRoute>} />
               <Route path="/professional/ai" element={<ThemeRoute theme="dark"><Index /></ThemeRoute>} />
+              <Route path="/professional/infra" element={<ThemeRoute theme="dark"><Index /></ThemeRoute>} />
               
               <Route path="/professional/blog" element={<ThemeRoute theme="dark"><Blog /></ThemeRoute>} />
               <Route path="/professional/blog/series/:series" element={<ThemeRoute theme="dark"><BlogSeries /></ThemeRoute>} />

@@ -28,7 +28,6 @@ export const SPECIALIZATIONS: Record<string, SpecializationConfig> = {
     featuredProjectTitle: "Low-Latency Exchange Matching Engine",
     majorProjectTitles: [
       "Configurable Cache Performance Simulator",
-      "FedDP — Distributed Privacy-Preserving ML Infrastructure",
       "Biosignals — Distributed Disaster Early Warning System"
     ],
     aboutCards: [
@@ -58,13 +57,11 @@ export const SPECIALIZATIONS: Record<string, SpecializationConfig> = {
     ],
     description: "CS graduate who breaks things to make them stronger. From automated IAM analysis tools and recon pipelines to SOC simulations and CTF competitions — I operate across the full offensive/defensive stack. Currently hunting bugs and writing about it.",
     skills: ["OWASP", "Burp Suite", "Nmap", "SIEM", "YARA", "MITRE ATT&CK", "Splunk", "AWS IAM"],
-    interests: ["Cybersecurity", "Penetration Testing", "Threat Detection", "Security Automation", "Zero-Trust Architectures"],
-    featuredProjectTitle: "AWS IAM Policy Security Analyzer",
+    interests: ["Offensive Security", "Cloud Security", "SecOps & SIEM", "Vulnerability Analysis", "Automation"],
+    featuredProjectTitle: "Automated AWS IAM Least-Privilege Auditor",
     majorProjectTitles: [
-      "SubWhisper — Subdomain Recon Automation Tool",
       "Phishing Simulation Campaign",
       "SOC Analyst Simulation — LetsDefend.io",
-      "FedDP — Byzantine-Robust Federated Learning with Differential Privacy",
       "Cascade-Guard — Propagation-Based Fake News Detection"
     ],
     aboutCards: [
@@ -74,7 +71,7 @@ export const SPECIALIZATIONS: Record<string, SpecializationConfig> = {
       },
       {
         title: "Secure Systems & Research",
-        desc: "My FedDP framework integrates federated learning with differential privacy, suppressing adversarial attacks while preserving user privacy — proving security and utility aren't mutually exclusive."
+        desc: "I research privacy-preserving distributed frameworks that secure neural computations, defending distributed nodes from active parameter poisoning attacks while keeping training datasets private."
       },
       {
         title: "Security Operations",
@@ -98,7 +95,6 @@ export const SPECIALIZATIONS: Record<string, SpecializationConfig> = {
     featuredProjectTitle: "Cascade-Guard — Graph Neural Network for Disinformation Detection",
     majorProjectTitles: [
       "Aggrow — AI-Powered Agricultural Decision System",
-      "FedDP — Federated Learning with Differential Privacy",
       "Biosignals — ML-Driven Disaster Prediction from Animal Behavior",
       "Deadline Extractor Agent — LLM-Powered Workflow Automation"
     ],
@@ -109,7 +105,7 @@ export const SPECIALIZATIONS: Record<string, SpecializationConfig> = {
       },
       {
         title: "Privacy-Preserving ML",
-        desc: "My IEEE-submitted FedDP research trains models across 100 distributed clients with differential privacy guarantees and Byzantine attack resilience — without sharing raw data."
+        desc: "I specialize in privacy-centric federated learning schemes, applying local differential privacy guarantees and cryptographic aggregation protocols to secure machine learning networks."
       },
       {
         title: "Applied AI",

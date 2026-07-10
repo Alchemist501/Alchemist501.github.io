@@ -3,6 +3,7 @@ import { motion, useScroll, useTransform } from "framer-motion";
 import { useTheme } from "@/contexts/ThemeContext";
 import { useRole } from "@/contexts/RoleContext";
 import { SPECIALIZATIONS } from "@/lib/config";
+import { SKILLS_DATA, ALL_INTERESTS } from "@/lib/skillsData";
 import { LightPortfolio } from "@/components/LightPortfolio";
 import { ThemeToggle } from "@/components/ThemeToggle";
 import { TypewriterText } from "@/components/TypewriterText";
@@ -102,153 +103,54 @@ const DarkModeContent = ({
   };
 
   const orderedSkills = useMemo(() => {
-    if (role === "systems") {
-      return [
-        {
-          id: "core",
-          category: "Core Systems",
-          icon: <Cpu className="w-8 h-8" />,
-          skills: ["Memory Management", "Concurrency", "Lock-free Programming", "Kernel Space", "Low-Latency Data Structures"],
-          color: "text-[hsl(200,100%,50%)]",
-          borderColor: "border-[hsl(200,100%,50%)]",
-          bgColor: "bg-[hsl(200,100%,50%)]/20",
-          glow: "glow-blue"
-        },
-        {
-          id: "languages",
-          category: "Languages",
-          icon: <Code2 className="w-8 h-8" />,
-          skills: ["C++", "Rust", "Go", "C", "Bash"],
-          color: "text-[hsl(280,100%,60%)]",
-          borderColor: "border-[hsl(280,100%,60%)]",
-          bgColor: "bg-[hsl(280,100%,60%)]/20",
-          glow: "glow-purple"
-        },
-        {
-          id: "platforms",
-          category: "Platforms & Tools",
-          icon: <BookOpen className="w-8 h-8" />,
-          skills: ["Linux", "UNIX/POSIX", "Git", "Docker", "eBPF"],
-          color: "text-[hsl(180,100%,50%)]",
-          borderColor: "border-[hsl(180,100%,50%)]",
-          bgColor: "bg-[hsl(180,100%,50%)]/20",
-          glow: "glow-cyan"
-        },
-        {
-          id: "other",
-          category: "Interests & Infra",
-          icon: <Shield className="w-8 h-8" />,
-          skills: ["Network Programming", "Performance Auditing", "Distributed Systems"],
-          color: "text-[hsl(330,100%,60%)]",
-          borderColor: "border-[hsl(330,100%,60%)]",
-          bgColor: "bg-[hsl(330,100%,60%)]/20",
-          glow: "glow-pink"
-        }
-      ];
-    } else if (role === "cybersecurity") {
-      return [
-        {
-          id: "core",
-          category: "Security Operations",
-          icon: <Shield className="w-8 h-8" />,
-          skills: ["SIEM (Splunk)", "Threat Detection", "Incident Response", "Vulnerability Analysis"],
-          color: "text-[hsl(0,100%,50%)]",
-          borderColor: "border-[hsl(0,100%,50%)]",
-          bgColor: "bg-[hsl(0,100%,50%)]/20",
-          glow: "glow-red"
-        },
-        {
-          id: "testing",
-          category: "Offensive Security",
-          icon: <Code2 className="w-8 h-8" />,
-          skills: ["Penetration Testing", "OWASP Top 10", "Burp Suite", "Nmap", "Metasploit"],
-          color: "text-[hsl(330,100%,60%)]",
-          borderColor: "border-[hsl(330,100%,60%)]",
-          bgColor: "bg-[hsl(330,100%,60%)]/20",
-          glow: "glow-pink"
-        },
-        {
-          id: "tools",
-          category: "Tools & Scripting",
-          icon: <Cpu className="w-8 h-8" />,
-          skills: ["Scapy", "GoPhish", "YARA", "AWS IAM Security", "Python"],
-          color: "text-[hsl(180,100%,50%)]",
-          borderColor: "border-[hsl(180,100%,50%)]",
-          bgColor: "bg-[hsl(180,100%,50%)]/20",
-          glow: "glow-cyan"
-        },
-        {
-          id: "infra",
-          category: "Network Defense",
-          icon: <BookOpen className="w-8 h-8" />,
-          skills: ["Wireshark", "IDS/IPS Auditing", "eBPF Syscall Auditing", "Linux Security"],
-          color: "text-[hsl(280,100%,60%)]",
-          borderColor: "border-[hsl(280,100%,60%)]",
-          bgColor: "bg-[hsl(280,100%,60%)]/20",
-          glow: "glow-purple"
-        }
-      ];
-    } else {
-      return [
-        {
-          id: "core",
-          category: "Deep Learning",
-          icon: <Brain className="w-8 h-8" />,
-          skills: ["TensorFlow", "PyTorch", "Transformers", "Model Optimization", "CUDA"],
-          color: "text-[hsl(280,100%,60%)]",
-          borderColor: "border-[hsl(280,100%,60%)]",
-          bgColor: "bg-[hsl(280,100%,60%)]/20",
-          glow: "glow-purple"
-        },
-        {
-          id: "distributed",
-          category: "Distributed ML",
-          icon: <Cpu className="w-8 h-8" />,
-          skills: ["Federated Learning (Flower)", "Differential Privacy", "Secure Aggregation", "PySyft"],
-          color: "text-[hsl(200,100%,50%)]",
-          borderColor: "border-[hsl(200,100%,50%)]",
-          bgColor: "bg-[hsl(200,100%,50%)]/20",
-          glow: "glow-blue"
-        },
-        {
-          id: "vision",
-          category: "Computer Vision",
-          icon: <Code2 className="w-8 h-8" />,
-          skills: ["OpenCV", "ResNet (CNN)", "Image Processing", "Feature Extraction"],
-          color: "text-[hsl(180,100%,50%)]",
-          borderColor: "border-[hsl(180,100%,50%)]",
-          bgColor: "bg-[hsl(180,100%,50%)]/20",
-          glow: "glow-cyan"
-        },
-        {
-          id: "dev",
-          category: "Backend & Systems",
-          icon: <BookOpen className="w-8 h-8" />,
-          skills: ["Python", "Flask", "C++ Engine Integrations", "Linux Execution", "REST APIs"],
-          color: "text-[hsl(330,100%,60%)]",
-          borderColor: "border-[hsl(330,100%,60%)]",
-          bgColor: "bg-[hsl(330,100%,60%)]/20",
-          glow: "glow-pink"
-        }
-      ];
-    }
+    const rawGroups = SKILLS_DATA[role] || SKILLS_DATA.systems;
+    
+    const getGroupIcon = (groupId: string) => {
+      if (groupId === "core") return <Cpu className="w-8 h-8" />;
+      if (groupId === "languages" || groupId === "testing" || groupId === "distributed") return <Code2 className="w-8 h-8" />;
+      if (groupId === "platforms" || groupId === "tools" || groupId === "vision") return <BookOpen className="w-8 h-8" />;
+      return <Shield className="w-8 h-8" />;
+    };
+    
+    const stylesMap = [
+      {
+        color: "text-[hsl(200,100%,50%)]",
+        borderColor: "border-[hsl(200,100%,50%)]",
+        bgColor: "bg-[hsl(200,100%,50%)]/20",
+        glow: "glow-blue"
+      },
+      {
+        color: "text-[hsl(280,100%,60%)]",
+        borderColor: "border-[hsl(280,100%,60%)]",
+        bgColor: "bg-[hsl(280,100%,60%)]/20",
+        glow: "glow-purple"
+      },
+      {
+        color: "text-[hsl(180,100%,50%)]",
+        borderColor: "border-[hsl(180,100%,50%)]",
+        bgColor: "bg-[hsl(180,100%,50%)]/20",
+        glow: "glow-cyan"
+      },
+      {
+        color: "text-[hsl(330,100%,60%)]",
+        borderColor: "border-[hsl(330,100%,60%)]",
+        bgColor: "bg-[hsl(330,100%,60%)]/20",
+        glow: "glow-pink"
+      }
+    ];
+
+    return rawGroups.map((group, idx) => {
+      const style = stylesMap[idx % stylesMap.length];
+      return {
+        ...group,
+        icon: getGroupIcon(group.id),
+        ...style
+      };
+    });
   }, [role]);
 
   const orderedInterests = useMemo(() => {
-    const allInterests = [
-      { name: "Low-Latency Systems", rolePriority: { systems: 1, cybersecurity: 5, ai: 4 } },
-      { name: "Distributed Infrastructure", rolePriority: { systems: 2, cybersecurity: 6, ai: 3 } },
-      { name: "Backend Engineering", rolePriority: { systems: 3, cybersecurity: 7, ai: 5 } },
-      { name: "Computer Architecture", rolePriority: { systems: 4, cybersecurity: 8, ai: 6 } },
-      { name: "Cybersecurity", rolePriority: { systems: 7, cybersecurity: 1, ai: 8 } },
-      { name: "Penetration Testing", rolePriority: { systems: 8, cybersecurity: 2, ai: 9 } },
-      { name: "Threat Detection", rolePriority: { systems: 6, cybersecurity: 3, ai: 7 } },
-      { name: "Security Automation", rolePriority: { systems: 5, cybersecurity: 4, ai: 10 } },
-      { name: "Distributed Learning", rolePriority: { systems: 9, cybersecurity: 10, ai: 1 } },
-      { name: "AI in Security", rolePriority: { systems: 10, cybersecurity: 9, ai: 2 } },
-    ];
-
-    return [...allInterests]
+    return [...ALL_INTERESTS]
       .sort((a, b) => a.rolePriority[role] - b.rolePriority[role])
       .map(item => item.name);
   }, [role]);
